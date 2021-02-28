@@ -1,0 +1,252 @@
+---
+title: "Workshop 1"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+---
+title: "Workshop 1 with solutions"
+author: "Barry Quinn"
+output:
+  html_document:
+    fig_height: 5
+    fig_width: 8
+    toc: yes
+    toc_depth: 1
+    toc_float:
+      collapsed: false
+    number_sections: false
+    theme: readable
+    highlight: tango
+---
+---
+
+## Before you begin
+1. Open an R script and run:
+2. File > New File > R script
+3. Then run the following code
+
+```{r eval=F,echo=F}
+install.packages("tidyverse",dependencies = TRUE)
+install.packages("tidyquant",dependencies = TRUE)
+library(tidyverse)
+library(tidyquant)
+
+# if required also load
+# install.packages("zeallot",dependencies = TRUE)
+# install.packages(,"backports",dependencies = TRUE)
+
+library(tidyverse)
+library(tidyquant)
+# library(zeallot)
+```
+
+
+```{r setup, include=F}
+MyDeleteItems<-ls()
+rm(list=MyDeleteItems)
+knitr::opts_chunk$set(echo = TRUE)
+library(fpp2)
+library(tidyquant)
+library(tidyverse)
+
+```
+
+
+
+# Ex 1 filter financial data
+
+> Use the `tq_get` function in the `tidyquant` package, download all the avaliable stock price data for the following UK listed firms from 01/01/2016. Hint: you need to find the Yahoo finance ticker of each which is then used as the first argument of the `tq_tet` function
+
+1. Greggs. 
+2. BT
+3. Unilever
+
+
+```{r download data}
+tickers<-c("GRG.L","BT-A.L","ULVR.L")
+port<-tq_get(tickers,get="stock.prices", from="2016-01-04")   
+```
+
+> Use the `tq_get` function in the `tidyquant` package, download all the avaliable dividend data for the previous UK listed firms from 01/01/2016. Hint: use `get="dividends"` as the second argument in the `tq_get` function. 
+
+```{r download dividends}
+port_div<-tq_get(tickers,get="dividends",from="2016-01-04")
+```
+
+# Ex 2 Calculating and visualising returns
+
+> Create log returns for each daily price series using the `mutate` function in the `dplyr` package. Recall the formula
+
+$$r_t=ln(P_t)-ln(P_{t-1})$$
+
+**Hint:** use the `lag()` in the `mutate` to call $P_{t-1}$
+
+```{r log returns}
+port <- port %>%
+  arrange(symbol,date) %>% # ensure data is order by stock and then chronologically 
+  group_by(symbol) %>% # this ensures the lag operating only operate with each symbol
+  mutate(log_return=log(adjusted)-log(lag(adjusted)))
+
+port %>% 
+  filter(date==as.Date("2016-01-04")) %>% 
+  select(symbol,date,log_return) # A sanity check to ensure that log returns are calculated correctly
+```
+
+> Which price is the most appropriate to use when creating returns from the data downloaded using `tq_get`?  Explain your answer.
+
+As a default, tq_get downloads the open, high, low, closing, and adjusted prices from yahoo finance.  As the name suggests, *adjusted price* take into account any stock splits of the company's shareholding which will usually result in a significant change to the stock price.
+
+> Plot each log returns series in such a way as to compare their volatility over time. Hint: try using `facet_wrap` in `ggplot2` to create seperate plots.
+
+```{r plot price}
+p<-port %>% 
+  ggplot(aes(x=date,y=log_return,colour=symbol))
+p + geom_line()
+```
+
+```{r facted plot}
+p + geom_line() +
+  facet_wrap(~symbol) +
+  theme(legend.position = "none")
+```
+
+Another way to compare these series is to consider the extreme (or outlying) returns.  Conventionally, you might want to consider values greater than 95^th^ percentile by using `stat_peak()` and `stat_valley()` from the `ggpmisc` package.  The latter package may have to be installed on your machine.
+
+```{r peaks and troughs plot}
+# install.packages("ggpmisc")
+library(ggpmisc)
+ p +
+   geom_line() +
+   stat_peaks(colour = "red",ignore_threshold = 0.95) +
+   stat_valleys(colour = "blue",ignore_threshold =0.95)
+  # stat_peaks(geom = "text", 
+  #            colour = "red", 
+  #            vjust = -0.5, 
+  #            x.label.fmt = "%Y-%m-%d",
+  #            ignore_threshold = 0.95) +
+  # stat_valleys(colour = "blue",ignore_threshold =0.95) +
+  # stat_valleys(geom = "text", 
+  #              colour = "blue", 
+  #              vjust = 1.5, hjust = 1,  
+  #              x.label.fmt = "%Y-%m-%d",
+  #              ignore_threshold = 0.95)
+```
+
+From the plot we can see that Greggs has 3 days where the above the 95th percentile of peaks, while BT has one observation beyond the 95th percentile of troughs.
+
+# Ex 3 Total returns
+
+> What are challenges that an analyst would face in creating a total returns series?
+
+1. The dividend series are of a different frequency to the price series.
+2. How to combine series of different frequencies in `R`
+
+> Attempt to solves these challenges above and create total returns for each of the stocks in the portfolio.
+
+Firstly, merge the dividend series with the price series using `by=c("symbol","date")`.  This will results in and addition variable in your `tibble` for dividend.  Recall from the lecture that dividend payments are include using the following:
+
+$$R_t= \frac{P_t+D_t}{P_{t-1}}-1 \; , \;r_t=ln(P_t+D_t)-ln(P_{t-1})$$
+
+```{r total return}
+port <- left_join(port,port_div,by=c("symbol","date"))
+port<-port %>%
+  mutate(total_return=if_else(!is.na(dividends),
+                              log(adjusted+dividends)-log(lag(adjusted)),
+                              log_return))
+```
+
+# Ex 4 Portfolio analytics
+
+> Create two daily equally weighted portfolio return series for a portfolio containing the three stocks using log returns and total returns.  
+Plot your results and discuss the differences.  
+Hint: one way to compare price and total return is to use the `cumsum` function.
+
+```{r portfolio returns}
+port_returns <- port %>%
+  group_by(date) %>%
+  summarise(total_return_ew=mean(total_return),
+            price_return_ew=mean(log_return)) %>%
+  filter(!is.na(total_return_ew)) %>%
+  ungroup() %>%
+  mutate(total_return_ew_cum=cumsum(total_return_ew),
+            price_return_ew_cum=cumsum(price_return_ew))
+
+port_returns_long_cum <- port_returns %>%
+  select(date,total_return_ew_cum,price_return_ew_cum) %>%
+  gather(return_type,return,-date)
+
+port_returns_long_cum %>%
+  ggplot(aes(x=date,y=return,colour=return_type)) +
+  geom_line() 
+```
+
+
+> Create a daily value-weight portfolio return with the following holdings: 
+Unilever = 50 shares
+BT = 50 shares
+Greggs = 200 shares  
+
+Hint: You must first create a weights series using the following formula
+
+$$w_{it}= \frac{V_{it}}{\sum V_{it}} \text{ where } V_{it}=Quantity \times P_{it}$$
+
+Then using the portfolio return formula
+
+$$r_{p,t} \approx \sum_{i=1}^{N}w_ir_{it}$$
+
+```{r value_weight returns}
+port <- port %>%
+  mutate(quantity=if_else(symbol %in% c("BT-A.L","ULVR.L"),50,200),
+         value=adjusted*quantity/100) %>%
+  group_by(date) %>%
+  mutate(weight=value/sum(value))
+
+port %>% group_by(symbol) %>% summarise(mean(quantity)) # A sanity check that all the quantities have been allocated appropriately.
+
+port_returns_vw <-port %>%
+  group_by(date) %>%
+  summarise(total_return_vw=sum(weight*total_return),
+            price_return_vw=sum(weight*log_return)) %>%
+  filter(!is.na(total_return_vw)) %>%
+  ungroup() %>%
+  mutate(total_return_vw_cum=cumsum(total_return_vw),
+            price_return_vw_cum=cumsum(price_return_vw))
+
+port_returns_long_cum_vw <- port_returns_vw %>%
+  select(date,total_return_vw_cum,price_return_vw_cum) %>%
+  gather(return_type,return,-date)
+
+port_returns_long_cum_vw %>%
+  ggplot(aes(x=date,y=return,colour=return_type)) +
+  geom_line() 
+
+```
+
+> Plot and visually compare the value-weight returns to the equally-weighted returns.  Provide some rationale for the differences?
+
+```{r compare weightings}
+port_returns_long_cum_all<-bind_rows(port_returns_long_cum,port_returns_long_cum_vw)
+
+port_returns_long_cum_all %>% 
+  ggplot(aes(x=date,y=return,colour=return_type)) +
+  geom_line() 
+
+```
+
+The value weight cumulative returns are significantly larger than the equally weight returns at the end of the period. Recall that that Gregg experience the most peaks in our previous analysis using a 95% threshold.  In the weighted portfolio Gregg has 4 times the holding than the other two equities.
+
+
+> Explain when it is **not** appropriate to use the above approximation for portfolio returns
+
+When the returns are far from zero, for example when the time interval is long, for instance quarterly or annual returns which are likely to be far from zero.
+
+> Why would an analyst prefer to use a total returns rather than price returns when asessing the performance of a portfolio investment?  What investment assumption does the total return calculation make?
+
+Total returns capture the income and capital gains from holding an stock.  In the long term dividend income becomes an increasingly important part of the total return opportunity for investing.
