@@ -80,17 +80,16 @@ library(fpp2)
 > In the `tsfe` pacakge open the  `ftse350` data and using the glimpse function to explore the data.  Describe what you see?  Click `Run Code` to see the data
 
 
-```{r summarise, exercise = TRUE, exercise.eval = FALSE}
+```{r summarise, exercise = TRUE}
 tsfe::ftse350
 ftse350 %>% glimpse
 ```
 
-```{r summarise-check}
-"Good job!"
-```
-
 
 > What is the top 100 stocks in terms of market capitalisation? Challenge: filter the data to rank stocks on market size (Hint: some code to start `ftse350 %>% filter(variable=="Market Value") %>% group_by(date) %>%`)
+
+**Hint:** Use`rank = min_rank(desc(value)))` to rank `value` (for example) such that the largest market cap will be the top. 
+
     
 ```{r filter, exercise = TRUE}
     
@@ -104,16 +103,10 @@ ftse350 %>%
   filter(rank %in% c(1:100))
 ```
     
-<div id="filter-hint">
-**Hint:** Use`min_rank(desc(avg_delay))` to rank `avg_delay` (for example) such that the largest delay receives rank one. 
-</div>
-
-```{r filter-check}
-"Great work!"
-```
 
 
-### Exercise extract the prices and market values for the following three stocks. Name the resultant dataframe `port`
+### Exercise stocks
+Extract the prices and market values for the following three stocks. Name the resultant dataframe `port`
 
 1. Greggs 
 2. BT
@@ -140,11 +133,11 @@ $$r_t=ln(P_t)-ln(P_{t-1})$$
 
 **Hint:** use the `lag()` in the `mutate` to call $P_{t-1}$
 
-```{r log-returns, exercise=TRUE}
+```{r logreturns, exercise=TRUE}
 
 ```
 
-```{r log-returns-solution, exercise=TRUE}
+```{r logreturns-solution}
 
 port_ret <- port %>%
   filter(variable=="Price") %>%
@@ -159,11 +152,11 @@ port_ret %>% head() # A sanity check to ensure that log returns are calculated c
 ### Exercise how to plot returns for comparison 1
 Plot each log returns series in such a way as to compare their volatility over time using the aesthetic `colour`. Hint: try using `facet_wrap` in `ggplot2` to create separate plots.
 
-```{r plot-price, excercise=T}
+```{r plotprice, exercise=TRUE}
 
 ```
 
-```{r plot-price-solution}
+```{r plotprice-solution}
 port_ret %>% 
   ggplot(aes(x=date,y=log_return,colour=ticker)) + 
   geom_line()
@@ -172,11 +165,11 @@ port_ret %>%
 ### Exercise how to plot returns for comparison 2
 Plot each log returns series in such a way as to compare their volatility over time. Hint: try using `facet_wrap` in `ggplot2` to create separate plots.
 
-```{r plot-price1}
+```{r plotprice1, exercise=TRUE}
 
 ```
 
-```{r plot-price1-solution}
+```{r plotprice1-solution}
 port_ret %>% 
   ggplot(aes(x=date,y=log_return,colour=ticker)) + 
   geom_line() +
@@ -276,7 +269,7 @@ port_ret_vw <-port_ret_vw %>%
 
 Combine the portfolio returns using `left_join()` . Hint: you need to choose a merging variable which unique identifies the portfolio returns time series.  Name the new object `port_ret_both`
 
-```{r combine, exercise}
+```{r combine, exercise=TRUE}
 
 ```
 
@@ -286,14 +279,15 @@ port_ret_both<- port_ret_vw %>% rename(vw_ret=ret) %>%
   left_join(port_ret_ew %>% rename(ew_ret=ret),by="date")
 ```
 
-### Exercise plot returns and describe
+### Exercise: plot returns and describe
+
 Plot and visually compare the value-weight returns to the equally-weighted returns.  Provide some rationale for the differences? Hint: use `cumsum` to plot the wealth creation in the daily returns series
 
-```{r compare_weightings}
+```{r compare, exercise=TRUE}
 ```
 
 
-```{r compare_weightings-solution}
+```{r compare-solution}
 port_ret_both %>%
   ungroup() %>%
   drop_na() %>%

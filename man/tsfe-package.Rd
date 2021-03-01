@@ -6,10 +6,10 @@
 \alias{tsfe-package}
 \title{tsfe: What the Package Does (One Line, Title Case)}
 \description{
-What the package does (one paragraph).
+used to teach time series financial econometrics.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Barry Quinn \email{bquinn@qub.ac.uk} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
 }
 \keyword{internal}
