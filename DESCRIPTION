@@ -2,12 +2,12 @@ Package: tsfe
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Barry",
+           family = "Quinn",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "bquinn@qub.ac.uk",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: used to teach time series financial econometrics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,7 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
-Imports: 
-    tibble
 Suggests: 
-    learnr
+    learnr,
+    tibble,
+    fpp2

@@ -304,6 +304,7 @@ port_ret_both %>%
   ggplot(aes(x=date,y=wealth,colour=port)) + 
   geom_line()
 ```
+
 ## Topic 4 Test your knowledge
 
 ```{r logicals, echo = FALSE}
@@ -317,6 +318,7 @@ question("Explain when it is **not** appropriate to use the above approximation 
 ```
 
 
+
 ```{r logicals1, echo = FALSE}
 question("Why would an analyst prefer to use a total returns rather than price returns when asessing the performance of a portfolio investment?",
          answer("Total returns capture the income gains from holding an stock"),
@@ -326,6 +328,7 @@ question("Why would an analyst prefer to use a total returns rather than price r
          allow_retry = TRUE
 )
 ```
+
 
 
 ```{r logicals2, echo = FALSE}
