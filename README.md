@@ -29,5 +29,5 @@ Go to File>New>R Markdown... and choose from `From Template` then `Report`.
 This package also includes dataset used in the course
 
 ``` r
-data(tsfe)
+tsfe::ftse350
 ```
