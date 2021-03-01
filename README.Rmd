@@ -1,0 +1,69 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# tsfe
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This package contains templates for reports, and functions and workshops using in [*Time series financial econometrics*](https://canvas.qub.ac.uk/courses/11736) taught by [Barry Quinn](https://quinference.com/) inb Queen's Management School. 
+
+
+## Installation
+
+``` r
+remotes::install_github("barryquinn1/tsfe")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("barryquinn1/tsfe")
+```
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(tsfe)
+## basic example code
+```
+
+
+
+```{r summary data}
+data("ftse350")
+summary(ftse350)
+```
+
+You can start the tutorials in one of two ways. First, in RStudio 1.3 or later, you will find the ATI tutorials listed in the "Tutorial" tab in the top-right pane (by default). Find a tutorial and click "Run Tutorial" to get started. Second, you can run any tutorial from the R console by typing the following line: 
+
+``` r
+learnr::run_tutorial("Workshop2","tsfe")
+```
+
+This should bring up a tutorial in your default web browser. You can see the full list of tutorials by running:
+
+``` r
+learnr::run_tutorial(package = "tsfe")
+```
+
+## Project Report
+This package also includes a RMarkdown template for use in the project report.
+Go to File>New>R Markdown... and choose from `From Template` then `project-report`.
+
+## Datasets
+This package also includes dataset used in the course
