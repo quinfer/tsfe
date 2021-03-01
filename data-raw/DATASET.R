@@ -25,3 +25,7 @@ tq_get("^FTSE",from="2016-01-01") %>%
 usethis::use_data(ftse_m_ts,overwrite = TRUE)
 ###
 usethis::use_data(unilever_eps_ts,overwrite = TRUE)
+
+### FTSE 350 prices and market cap
+readRDS('data-raw/ftse350.rds')->ftse350
+usethis::use_data(ftse350,overwrite = TRUE)

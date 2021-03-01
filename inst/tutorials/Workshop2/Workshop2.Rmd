@@ -1,0 +1,173 @@
+---
+title: "Workshop 2 portfolio analytics"
+output: learnr::tutorial
+runtime: shiny_prerendered
+    progressive: true
+    allow_skip: true
+description: 
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse) # loads dplyr, ggplot2, and others
+library(tidyquant)
+library(fpp2)
+library(ggpmisc)
+knitr::opts_chunk$set(echo = FALSE)
+tickers<-c("GRG","BT-A","ULVR")
+ftse350 %>% filter(ticker %in% tickers) -> port
+
+```
+
+## Welcome
+
+In this tutorial, you will learn how to summarise a table of data, including:
+
+* How to rank financial data in terms of size
+* How to summarise tables with `filter()` 
+* How to recognize the most useful families of functions to combine with `summarise()`
+* How to combine multiple dplyr operations with the pipe, `%>%`
+* How to compute counts of observations with `n()`
+* How to summarise groups of observations with `group_by()` and `summarise()`
+
+The readings in this tutorial follow [_R for Data Science_](http://r4ds.had.co.nz/), section 5.6.
+
+### Setup
+
+I've preloaded the packages for this tutorial with 
+
+```{r eval = FALSE}
+library(tidyverse) # loads dplyr, ggplot2, and others
+library(tidyquant)
+library(ggpmisc)
+library(fpp2)
+```
+
+## Topic 1 data manipulation
+
+### Exercise explore the FTSE350 data
+
+> In the `tsfe` pacakge open the  `ftse350` data and using the glimpse function to explore the data.  Describe what you see?  Click `Run Code` to see the data
+
+
+```{r summarise, exercise = TRUE, exercise.eval = FALSE}
+tsfe::ftse350
+ftse350 %>% glimpse
+```
+
+```{r summarise-check}
+"Good job!"
+```
+
+
+> What is the top 100 stocks in terms of market capitalisation? Challenge: filter the data to rank stocks on market size (Hint: some code to start `ftse350 %>% filter(variable=="Market Value") %>% group_by(date) %>%`)
+    
+```{r filter, exercise = TRUE}
+    
+```
+
+```{r filter-solution}
+ftse350 %>%
+  filter(variable=="Market Value") %>%  
+  group_by(date) %>% 
+  mutate(rank = min_rank(desc(value))) %>% 
+  filter(rank %in% c(1:100))
+```
+    
+<div id="filter-hint">
+**Hint:** Use`min_rank(desc(avg_delay))` to rank `avg_delay` (for example) such that the largest delay receives rank one. 
+</div>
+
+```{r filter-check}
+"Great work!"
+```
+
+
+### Exercise extract the prices and market values for the following three stocks. Name the resultant dataframe `port`
+
+1. Greggs 
+2. BT
+3. Unilever
+
+
+```{r filtering-by-name, exercise=TRUE}
+tickers<-c("GRG","BT-A","ULVR") ## these are the tickers of the above stocks
+```
+
+```{r filtering-by-name-solution}
+tickers<-c("GRG","BT-A","ULVR")
+ftse350 %>% filter(ticker %in% tickers) -> port
+```
+## Topic 2 Calculating and visualising returns
+
+
+The port data which you created is in `tidy` form, which is one observation per row.  For the purposes of portfolio analytics we will need to filter on one variable to create returns.
+
+### Exercise log returns
+Create log returns for each daily price series using the `mutate` function in the `dplyr` package. Recall the formula
+
+$$r_t=ln(P_t)-ln(P_{t-1})$$
+
+**Hint:** use the `lag()` in the `mutate` to call $P_{t-1}$
+
+```{r log-returns, exercise=TRUE}
+
+port_ret <- port %>%
+  filter(variable=="Price") %>%
+  arrange(ticker,date) %>% # ensure data is order by stock and then chronologically 
+  group_by(ticker) %>% # this ensures the lag operating only operate with each symbol
+  mutate(log_return=log(value)-log(lag(value)))
+
+port_ret %>% head() # A sanity check to ensure that log returns are calculated correctly
+```
+
+### Exercise with Code
+
+*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
+
+Now write a function that adds any two numbers and then call it:
+
+```{r add-function, exercise=TRUE, exercise.lines = 5}
+add <- function() {
+  
+}
+```
+
+## Topic 2
+
+### Exercise with Hint
+
+*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
+mtcars
+```
+
+```{r print-limit-hint}
+head(mtcars)
+```
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```
