@@ -1,10 +1,11 @@
 ---
-title: "Workshop 2 portfolio analytics"
-output: learnr::tutorial
-runtime: shiny_prerendered
+title: " Workshop 2 portfolio analytics"
+output: 
+  learnr::tutorial:
     progressive: true
     allow_skip: true
-description: 
+runtime: shiny_prerendered
+description: ""
 ---
 
 ```{r setup, include=FALSE}
@@ -13,24 +14,42 @@ library(tidyverse) # loads dplyr, ggplot2, and others
 library(tidyquant)
 library(fpp2)
 library(ggpmisc)
-knitr::opts_chunk$set(echo = FALSE)
-tickers<-c("GRG","BT-A","ULVR")
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
+```
+
+```{r set-up-data,echo=FALSE}
+tickers<-c("GRG","BT.A","ULVR")
+
 ftse350 %>% filter(ticker %in% tickers) -> port
+port_ret <- port %>%
+  filter(variable=="Price") %>%
+  arrange(ticker,date) %>% # ensure data is order by stock and then chronologically 
+  group_by(ticker) %>% # this ensures the lag operating only operate with each symbol
+  mutate(log_return=log(value)-log(lag(value)))
+
+port_ret_ew <- port_ret %>%
+  group_by(date) %>%
+  summarise(ret=mean(log_return))
+
+port_w <- port %>% 
+  select(ticker,date,variable,value) %>%
+  spread(variable,value)
+
+port_ret_vw <-port_w %>%
+  group_by(date) %>%
+  mutate(weight=`Market Value`/sum(`Market Value`))
+
 
 ```
+
 
 ## Welcome
 
 In this tutorial, you will learn how to summarise a table of data, including:
 
 * How to rank financial data in terms of size
-* How to summarise tables with `filter()` 
-* How to recognize the most useful families of functions to combine with `summarise()`
-* How to combine multiple dplyr operations with the pipe, `%>%`
-* How to compute counts of observations with `n()`
-* How to summarise groups of observations with `group_by()` and `summarise()`
-
-The readings in this tutorial follow [_R for Data Science_](http://r4ds.had.co.nz/), section 5.6.
+* How filter stocks `filter()` 
+* Calculating and visualisng log returns
 
 ### Setup
 
@@ -91,15 +110,15 @@ ftse350 %>%
 
 
 ```{r filtering-by-name, exercise=TRUE}
-tickers<-c("GRG","BT-A","ULVR") ## these are the tickers of the above stocks
+tickers<-c("GRG","BT.A","ULVR") ## these are the tickers of the above stocks
 ```
 
 ```{r filtering-by-name-solution}
 tickers<-c("GRG","BT-A","ULVR")
 ftse350 %>% filter(ticker %in% tickers) -> port
 ```
-## Topic 2 Calculating and visualising returns
 
+## Topic 2 Calculating and visualising returns
 
 The port data which you created is in `tidy` form, which is one observation per row.  For the purposes of portfolio analytics we will need to filter on one variable to create returns.
 
@@ -112,6 +131,10 @@ $$r_t=ln(P_t)-ln(P_{t-1})$$
 
 ```{r log-returns, exercise=TRUE}
 
+```
+
+```{r log-returns-solution, exercise=TRUE}
+
 port_ret <- port %>%
   filter(variable=="Price") %>%
   arrange(ticker,date) %>% # ensure data is order by stock and then chronologically 
@@ -121,53 +144,189 @@ port_ret <- port %>%
 port_ret %>% head() # A sanity check to ensure that log returns are calculated correctly
 ```
 
-### Exercise with Code
 
-*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
+### Exercise how to plot returns for comparison 1
+Plot each log returns series in such a way as to compare their volatility over time using the aesthetic `colour`. Hint: try using `facet_wrap` in `ggplot2` to create separate plots.
 
-Now write a function that adds any two numbers and then call it:
+```{r plot-price, excercise=T}
 
-```{r add-function, exercise=TRUE, exercise.lines = 5}
-add <- function() {
-  
-}
 ```
 
-## Topic 2
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
+```{r plot-price-solution}
+port_ret %>% 
+  ggplot(aes(x=date,y=log_return,colour=ticker)) + 
+  geom_line()
 ```
 
-```{r print-limit-hint}
-head(mtcars)
+### Exercise how to plot returns for comparison 2
+Plot each log returns series in such a way as to compare their volatility over time. Hint: try using `facet_wrap` in `ggplot2` to create separate plots.
+
+```{r plot-price1}
+
 ```
 
-### Quiz
+```{r plot-price1-solution}
+port_ret %>% 
+  ggplot(aes(x=date,y=log_return,colour=ticker)) + 
+  geom_line() +
+  facet_wrap(~ticker)
+```
 
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+Another way to compare these series is to consider the extreme (or outlying) returns.  Conventionally, you might want to consider values greater than 95^th^ percentile by using `stat_peak()` and `stat_valley()` from the `ggpmisc` package.  The latter package may have to be installed on your machine.
 
-Some questions to verify that you understand the purposes of various base and recommended R packages:
+```{r peaks and troughs plot}
+# install.packages("ggpmisc")
+library(ggpmisc)
+ port_ret %>% 
+  ggplot(aes(x=date,y=log_return,colour=ticker)) + 
+  geom_line() +
+   stat_peaks(colour = "red",ignore_threshold = 0.95) +
+   stat_valleys(colour = "blue",ignore_threshold =0.95) +
+   facet_wrap(~ticker)
+```
 
-```{r quiz}
-quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
-  ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
-  )
+From the plot we can see that Greggs has 2 days where the returns are above the 95th percentile of peak, while BT and ULVR have one.Furthermore, Greggs and ulvr have 2 days where returns are below the 95th percentile of trough.  When doing your project how would to deal with outlying observations?
+
+> In our experience, the unexpected is usually not an "outlier", or an aberrant point by rather a systematic pattern in some part of the data - Gelman et al. (2020) 
+
+
+## Topic 3 Portfolio analytics
+
+This topic you will calculate two daily portfolio return series for a portfolio containing the three stocks using log returns and market value.
+
+### Exercise 1 equally weighted portfolio returns 
+
+Create an equally weighted returns series for the three stocks, then plot the resultant return series
+Hint: the mean is a equally weighted statistic.
+
+Then using the portfolio return formula
+
+$$r_{p,t} \approx \sum_{i=1}^{N}w_ir_{it}$$
+
+
+```{r eq-weight-returns, exercise=TRUE}
+
+```
+
+```{r eq-weight-returns-solution}
+port_ret_ew <- port_ret %>%
+  group_by(date) %>%
+  summarise(ret=mean(log_return))
+
+port_ret_ew %>%
+    ggplot(aes(x=date,y=ret)) +
+  geom_line() 
+```
+
+### Exercise calculate value weighted
+
+Create an value weighted returns series for the three stocks, then plot the resultant return series
+Hint: use the data with both price and market value
+
+$$w_{it}= \frac{V_{it}}{\sum V_{it}} \text{ where } V_{it}=Quantity \times P_{it}$$
+
+Then using the portfolio return formula
+
+$$r_{p,t} \approx \sum_{i=1}^{N}w_ir_{it}$$
+
+
+```{r reshape the data}
+port_w <- port %>% 
+  select(ticker,date,variable,value) %>%
+  spread(variable,value)
+```
+
+
+```{r vw-weight-returns, exercise=TRUE}
+
+```
+
+
+```{r vw-weight-returns-solution}
+port_ret_vw <-port_w %>%
+  group_by(date) %>%
+  mutate(weight=`Market Value`/sum(`Market Value`))
+
+# Sanity check
+port_ret_vw %>% 
+  summarise(tw=sum(weight)) %>%
+  filter(tw>1.0001)
+
+# market value weighted returns
+port_ret_vw <-port_ret_vw %>% 
+  arrange(ticker,date) %>% 
+  group_by(ticker) %>% 
+  mutate(log_return=log(Price)-log(lag(Price))) %>%
+  group_by(date) %>%
+  summarise(ret=sum(weight*log_return))
+```
+
+### Exercise merge returns
+
+Combine the portfolio returns using `left_join()` . Hint: you need to choose a merging variable which unique identifies the portfolio returns time series.  Name the new object `port_ret_both`
+
+```{r combine, exercise}
+
+```
+
+
+```{r combine-solution}
+port_ret_both<- port_ret_vw %>%
+  left_join(port_ret_ew,by="date")
+
+port_ret_both<-port_ret_both %>%
+  rename(ret_vw="ret.x",ret_ew="ret.y")
+```
+
+### Exercise plot returns and describe
+Plot and visually compare the value-weight returns to the equally-weighted returns.  Provide some rationale for the differences? Hint: use `cumsum` to plot the wealth creation in the daily returns series
+
+```{r compare_weightings}
+```
+
+
+```{r compare_weightings-solution}
+port_ret_both %>%
+  ungroup() %>%
+  drop_na() %>%
+  mutate(wealth_vw=cumsum(ret_vw),
+         wealth_ew=cumsum(ret_ew)) %>%
+  select(date,wealth_vw,wealth_ew) %>%
+  gather(port,wealth,-date) %>%
+  ggplot(aes(x=date,y=wealth,colour=port)) + 
+  geom_line()
+```
+## Topic 4 Test your knowledge
+
+```{r logicals, echo = FALSE}
+question("Explain when it is **not** appropriate to use the above approximation for portfolio returns",
+         answer("When the returns are far from zero, for example when the time interval is long, for instance quarterly or annual returns which are likely to be far from zero", correct = TRUE),
+         answer("When the returns are close to zero, for example when the time interval is long, for instance quarterly or annual returns which are likely to be far from zero."),
+         answer("When the returns are far from zero, for example when the time interval is short, for instance daily."),
+         answer("When the returns are far from 1"),
+         allow_retry = TRUE
 )
 ```
+
+
+```{r logicals1, echo = FALSE}
+question("Why would an analyst prefer to use a total returns rather than price returns when asessing the performance of a portfolio investment?",
+         answer("Total returns capture the income gains from holding an stock"),
+         answer("Total returns capture the income and capital gains from holding an stock",correct = TRUE),
+         answer("Total returns capture the capital and price gains from holding an stock"),
+         answer("Total returns capture capital income and CEO turnover activity"),
+         allow_retry = TRUE
+)
+```
+
+
+```{r logicals2, echo = FALSE}
+question("What investment assumption does the total return calculation make?",
+         answer("In the long term dividend income becomes an increasingly important part of the total return opportunity for investing.", correct = TRUE),
+         answer("In the long term dividend income becomes an decreasingly important part of the total return opportunity for investing."),
+         answer("In the long term dividend income is not an important part of the total return opportunity for investing."),
+         answer("Total returns capture capital income and merger activity"),
+         allow_retry = TRUE
+)
+```
+
