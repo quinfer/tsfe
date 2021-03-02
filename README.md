@@ -76,6 +76,8 @@ This package also includes a RMarkdown template for use in the project
 report. Go to File\>New\>R Markdown… and choose from `From Template`
 then `project-report`.
 
+We setting up your project I strongly recommend create a new project in RStudio and using [Github](https://www.hendrikbruns.tk/post/using-rstudio-and-git-version-control/).  The former will help to capture versions of your work, while the latter is industry standard for professional verision control.
+
 ## Datasets
 
 This package also includes dataset used in the course
