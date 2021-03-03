@@ -32,10 +32,7 @@ This is a basic example which shows you how to solve a common problem:
 ``` r
 library(tsfe)
 ## basic example code
-```
-
-``` r
-data("ftse350")
+data("ftse350")  # This is a 2MB file so might take some time to initially load
 summary(ftse350)
 #>      Name              ticker            variable              date           
 #>  Length:1016666     Length:1016666     Length:1016666     Min.   :2016-04-29  
@@ -52,6 +49,8 @@ summary(ftse350)
 #>  3rd Qu.:  2217.99   3rd Qu.:38.00  
 #>  Max.   :159163.60   Max.   :53.00
 ```
+
+## Tutorials
 
 You can start the tutorials in one of two ways. First, in RStudio 1.3 or
 later, you will find the ATI tutorials listed in the “Tutorial” tab in
@@ -70,13 +69,15 @@ the full list of tutorials by running:
 learnr::run_tutorial(package = "tsfe")
 ```
 
+If you would like to access the raw RMarkdown code which created these
+tutorials you can do so
+[here](https://github.com/barryquinn1/tsfe/tree/master/inst/tutorials)
+
 ## Project Report
 
 This package also includes a RMarkdown template for use in the project
 report. Go to File\>New\>R Markdown… and choose from `From Template`
 then `project-report`.
-
-We setting up your project I strongly recommend create a new project in RStudio and using [Github](https://www.hendrikbruns.tk/post/using-rstudio-and-git-version-control/).  The former will help to capture versions of your work, while the latter is industry standard for professional verision control.
 
 ## Datasets
 

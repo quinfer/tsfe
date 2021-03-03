@@ -178,7 +178,7 @@ port_ret %>%
 
 Another way to compare these series is to consider the extreme (or outlying) returns.  Conventionally, you might want to consider values greater than 95^th^ percentile by using `stat_peak()` and `stat_valley()` from the `ggpmisc` package.  The latter package may have to be installed on your machine.
 
-```{r peaks and troughs plot}
+```{r peaks and troughs plot, echo=TRUE,message=FALSE}
 # install.packages("ggpmisc")
 library(ggpmisc)
  port_ret %>% 
@@ -234,7 +234,7 @@ Then using the portfolio return formula
 $$r_{p,t} \approx \sum_{i=1}^{N}w_ir_{it}$$
 
 
-```{r reshape the data}
+```{r reshape the data, echo=TRUE, eval=TRUE}
 port_w <- port %>% 
   select(ticker,date,variable,value) %>%
   spread(variable,value)
