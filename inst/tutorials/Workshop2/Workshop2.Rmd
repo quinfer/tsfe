@@ -16,11 +16,11 @@ library(fpp2)
 library(ggpmisc)
 library(tsfe)
 knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
+data("ftse350")
 ```
 
-```{r set-up-data,echo=FALSE}
+```{r set-up-data,echo=FALSE,eval=TRUE}
 tickers<-c("GRG","BT.A","ULVR")
-data("ftse350")
 ftse350 %>% filter(ticker %in% tickers) -> port
 port_ret <- port %>%
   filter(variable=="Price") %>%
@@ -49,8 +49,6 @@ port_ret_vw <-port_ret_vw %>%
 
 port_ret_both<- port_ret_vw %>% rename(vw_ret=ret) %>%
   left_join(port_ret_ew %>% rename(ew_ret=ret),by="date")
-
-
 ```
 
 
@@ -284,6 +282,8 @@ port_ret_both<- port_ret_vw %>% rename(vw_ret=ret) %>%
 Plot and visually compare the value-weight returns to the equally-weighted returns.  Provide some rationale for the differences? Hint: use `cumsum` to plot the wealth creation in the daily returns series
 
 ```{r compare, exercise=TRUE}
+
+
 ```
 
 

@@ -1,0 +1,270 @@
+---
+title: "Exploring financial time series"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: ""
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tsfe)
+library(tidyquant)
+library(tidyverse)
+library(fpp2)
+library(lubridate)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+```
+
+```{r data setup, echo=FALSE, warning=FALSE}
+library(tsfe)
+data("diageo_pe")
+pe_m <- diageo_pe %>%
+  tq_transmute(select = PE,
+               mutate_fun = to.monthly)
+
+pe_m$PE %>% ts(frequency = 12,start = c(2010,1)) -> pe_m_ts
+
+data("indices")
+
+us_smcap_m <- indices %>% 
+  select(date,`RUSSELL 2000 - PRICE INDEX`) %>%
+  rename(price=`RUSSELL 2000 - PRICE INDEX`) %>%
+  tq_transmute(select = price,
+               mutate_fun = monthlyReturn,
+               type="arithmetic",
+               col_rename = "simple_return")
+
+us_smcap_m <- us_smcap_m %>%
+  mutate(month=month(date),
+         year=year(date))
+
+us_smcap_m %>% 
+  select(simple_return) %>%
+  drop_na() %>%
+  ts(frequency = 12,start = c(1988,3)) -> us_smcap_m_ts
+
+```
+
+
+## Before you begin
+1. You can access the raw RMarkdown code which includes the solution to this tutorial [here](https://github.com/barryquinn1/tsfe/tree/master/inst/tutorials)
+2. Ethical econometricians always work in `Projects` in RStudio. To become an ethical econometrician I recommend following this practice
+
+![](http://www.rstudio.com/images/docs/projects_new.png)
+
+[Why use projects?](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
+
+3. Below are are the packages used in this tutorial
+
+```{r packages, eval=F, echo=TRUE}
+library(learnr)
+library(tsfe)
+library(tidyquant)
+library(tidyverse)
+library(fpp2)
+library(lubridate)
+```
+
+## Topic 1 Exploration of financial ratio dynamics
+
+### Try at home exercise: download and import data from a financial database
+This exercise requires you to download data from the [S&P Capital IQ online platform](https://raptor.qub.ac.uk/genericInstruction.php?&suborg=qub&resourceId=41&url=http://www.capitaliq.com/).  Specifically, download daily price to earnings data for Diageo Plc for a 10 year period. Go to the Management School's key database page [here](http://libguides.qub.ac.uk/management/businessdatabases).  Click on S&P Capital IQ and create an account using your qub email (if you haven't got one already). Follow the instruction video on Canvas on how to download a time series from S&P Capital IQ using the chart builder.  You can read the data into R with the following script (or using the Import Dataset dropdown in the top right hand panel of `RStudio`)
+
+Here is some example code to pull in the data:
+```r
+pe <- readxl::read_excel("data/diageo_PE.xlsx") %>%
+  rename(PE=`Diageo plc (LSE:DGE) - P/Diluted EPS Before Extra`)
+```
+The `rename` function creates a tidier variable name.
+
+### Excercise 1: Monthly conversion of price earnings data
+ Create a monthly series from the daily `diageo_pe` object in the `tsfe` package. Name the object pe_m
+**Hint:** use `help()` with `tq_transmute` to figure out how to convert this daily series to a monthly series.  
+
+Hit `Run Code` to load data
+ 
+```{r load data, echo=TRUE}
+data("diageo_pe")
+```
+
+
+```{r monthly, exercise=TRUE}
+
+```
+
+
+```{r monthly-solution}
+pe_m <- diageo_pe %>%
+  tq_transmute(select = PE,
+               mutate_fun = to.monthly)
+```
+
+
+### Excercise 2
+Create a ts object of the monthly series using `ts()`, naming the new object `pe_m_ts`.
+**Hint:** to create a monthly `ts` object you need to know the starting date in `c(Year,Month)` numerical form.
+
+```{r pe_ts, exercise=TRUE}
+
+```
+
+```{r pe_ts-solution}
+head(pe_m)[1,1] # need to know what the start month is
+pe_m$PE %>% ts(frequency = 12,start = c(2010,1)) -> pe_m_ts
+```
+
+### Exercise 3: time series exploration toolbox
+
+Explore the time series using the following functions: `autoplot`, `ggseasonplot`, `ggsubseriesplot`, `gglagplot`, `ggAcf`. Can you spot any seasonality, cyclicity, trend or other dynamic features? What do you learn about the series?
+
+```{r tsexplore,  exercise=TRUE}
+
+```
+
+
+```{r tsexplore-solution}
+autoplot(pe_m_ts)
+ggseasonplot(pe_m_ts)
+ggsubseriesplot(pe_m_ts)
+gglagplot(pe_m_ts)
+ggAcf(pe_m_ts)
+```
+
+
+```{r quiz1}
+quiz(caption = "Inference Quiz",
+  question("Which of the following are appropriate inferences for these time series explorations",
+    answer("The patterns resemble a white noise process"),
+    answer("There is clearly no trend, or seasonality. But there is some cylicity in terms of small substantial rising and fall over 2 year periods with some substantial drops."),
+    answer("There is clearly an increasing trend, weak seasonality in the summer months according to the subseries plot, and some cylicity in terms of small substantial rising and fall over 2 year periods with some substantial drops.", correct = TRUE),
+    answer("The data has some significant autocorrelation", correct=TRUE)
+  ))
+```
+
+
+## Topic 2 Time series patterns of stock market indices
+In the `tsfe` package there is a dataset named `indices` which includes daily prices and rate for a collection of majority stock markets and currency pairs.  In this topic we will investigate the monthly patterns in one of these time series.  
+
+```{r quiz2}
+quiz(caption = "Practical Knowledge Quiz",
+  question("Which index in the `indices` data best represents the small-cap stock investment universe in the US.?",
+    answer("FTSE all share Index"),
+    answer("Dow Jone Index"),
+    answer("Russell 2000 Index", correct = TRUE),
+    answer("")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("ggpmisc", correct = TRUE),
+    answer("tools"),
+    answer("gplot2"),
+    answer("ggplot2", correct = TRUE)
+  )
+)
+```
+
+
+### Exercise 4
+Use the `indices` data to filter the price index which most broadly represents the small-cap stock investment universe in the US and create simple monthly returns.  Name the output `us_smcap_m` **Hint:** `?tq_transmute`
+
+```{r r2000, exercise=TRUE}
+
+```
+
+```{r r2000-solution}
+us_smcap_m <- indices%>% 
+  select(date,`RUSSELL 2000 - PRICE INDEX`) %>%
+  rename(price=`RUSSELL 2000 - PRICE INDEX`) %>%
+  tq_transmute(select = price,
+               mutate_fun = monthlyReturn,
+               type="arithmetic",
+               col_rename = "simple_return")
+```
+
+### Exercise 5 
+Create two variables from the  `date` series in the `us_smcap_m` data to a represent a monthly timestamp. **Hint:** Look up at the commands in `lubridate` to pull out components of a date
+
+```{r lubridating, exercise=TRUE}
+
+```
+
+```{r lubridating-solution}
+us_smcap_m <- us_smcap_m %>%
+  mutate(month=month(date),
+         year=year(date))
+```
+
+### Exercise 6
+
+Create a time series object of the monthly series using named `us_smcap_m_ts`. **Hint:** use `head` to work out start date and remember to drop the missing value.
+
+```{r ts1, exercise=TRUE}
+
+```
+
+```{r ts1-solution}
+head(us_smcap_m)
+us_smcap_m %>% 
+  select(simple_return) %>%
+  drop_na() %>%
+  ts(frequency = 12,start = c(1988,3)) -> us_smcap_m_ts
+```
+
+### Exercise 7
+
+Explore your chosen monthly time series using the following functions: `autoplot`, `ggseasonplot`, `ggsubseriesplot`, `gglagplot`, `ggAcf`. W
+
+```{r explore1, exercise=TRUE}
+
+```
+
+
+```{r explore1-solution}
+autoplot(us_smcap_m_ts)
+ggseasonplot(us_smcap_m_ts)
+ggsubseriesplot(us_smcap_m_ts)
+gglagplot(us_smcap_m_ts)
+ggAcf(us_smcap_m_ts,lag.max = 20)
+```
+
+
+```{r quiz3}
+quiz(caption = "Inference Quiz",
+  question("What can you say about the trend?",
+    answer("The time plot resembles white noise with no significant patterns jumping out",correct = TRUE),
+    answer("The time plot resembles white noise with lots of trending"),
+    answer("The time plot does not resemble white noise, and some patterns are present"),
+    answer("The time plot is inconclusive")
+  ),
+  question("What can you say about the seasonal patterns?",
+    answer("The seasonal subseries plots reveal some patterns in both volatility and price level", correct = TRUE),
+    answer("No discernible season patterns"),
+    answer("The seasonal plot reveals no patterns"),
+    answer("The seasonal plot reveals a clear season pattern in all months")
+  ),
+  question("Which inference best describes the autocorrelation plot?",
+    answer("The ACF shows a marginally significant spike at lag 5 and lag 17.Hence the simple returns in the Russell 2000 index do not resembles white noise.", correct = TRUE,message = "The ACF shows a marginally significant spike at lag 5 and lag 17. Remember these are 95% bounds and therefore we expect 5% (approx 1 out of 20) of them to lie outside these bounds. Hence the simple returns in the Russell 2000 index do not resembles white noise."),
+    answer("The ACF shows no significant spikes"),
+    answer("The ACF shows a marginally significant spike at lag 5 and lag 17 and as more than 5% of the spikes are within the 95% confidence banks, the simple returns in the Russell 2000 index resembles white noise."),
+    answer("None of the above")
+  )
+)
+```
+
+
+
+## Statistical thinking quiz
+
+Recall the appropriate interpretation of a p-value from the [ASA statement](https://amstat.tandfonline.com/doi/full/10.1080/00031305.2016.1154108)
+```{r quiz4}
+quiz( caption="Statistical rethinking quiz",
+  question("According to the ASA what is the most appropriate interpretation of a p-value?",
+    answer("P-values can indicate how causal the data are with a specified statistical model."),
+    answer("P-values can indicate how incompatible the model is with a sampled dataset."),
+    answer("P-values can indicate how incompatible the data are with a specified statistical model.", correct = TRUE,message = "A p-value provides one approach to summarizing the incompatibility between a particular set of data and a proposed model for the data. The most common context is a model, constructed under a set of assumptions, together with a so-called “null hypothesis.” Often the null hypothesis postulates the absence of an effect, such as no difference between two groups, or the absence of a relationship between a factor and an outcome. The smaller the p-value, the greater the statistical incompatibility of the data with the null hypothesis, if the underlying assumptions used to calculate the p-value hold. This incompatibility can be interpreted as casting doubt on or providing evidence against the null hypothesis or the underlying assumptions."),
+    answer("P-values are low the null must go")
+  )
+)
+```
