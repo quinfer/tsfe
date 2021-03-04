@@ -10,7 +10,7 @@
 This package contains templates for reports, and functions and workshops
 using in [*Time series financial
 econometrics*](https://canvas.qub.ac.uk/courses/11736) taught by [Barry
-Quinn](https://quinference.com/) inb Queen’s Management School.
+Quinn](https://quinference.com/) in Queen’s Management School.
 
 ## Installation
 
@@ -75,7 +75,7 @@ tutorials you can do so
 
 ## Project Report
 
-This package also includes a RMarkdown template for use in the project
+This package also includes an RMarkdown template for use in the project
 report. Go to File\>New\>R Markdown… and choose from `From Template`
 then `project-report`.
 
