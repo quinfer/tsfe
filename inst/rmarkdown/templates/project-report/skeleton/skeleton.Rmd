@@ -15,6 +15,7 @@ library(tidyverse)
 library(tidyquant)
 library(tsfe)
 library(fpp2)
+library(bookdown) ## this needs to be installed to knit this document to a pdf for submission.
 ## Total word count should be 1500 words excluding references
 ## When you knitr the document the references should automatically populate at the end of the document
 ```
@@ -57,4 +58,4 @@ Summarise and state your critical assessment using any evidence you have provide
 
 ## Reference
 
-*This is where the citied references should appear when you render the document to a pdf*
+*This is where the cited references should appear when you render the document to a pdf*
