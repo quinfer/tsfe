@@ -14,9 +14,6 @@ Quinn](https://quinference.com/) in Queen’s Management School.
 
 ## Installation
 
-``` r
-remotes::install_github("barryquinn1/tsfe")
-```
 
 And the development version from [GitHub](https://github.com/) with:
 
