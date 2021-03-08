@@ -19,17 +19,21 @@ tutorial_options(exercise.timelimit = 60,exercise.eval = TRUE)
 
 ```
 
-
-```{r data setup, eval=TRUE, warning=FALSE}
+```{r, include=FALSE}
 library(tsfe)
 data("diageo_pe")
+data("indices")
+```
+
+
+```{r data setup, include=FALSE}
 pe_m <- diageo_pe %>%
   tq_transmute(select = PE,
                mutate_fun = to.monthly)
 
 pe_m$PE %>% ts(frequency = 12,start = c(2010,1)) -> pe_m_ts
 
-data("indices")
+
 
 us_smcap_m <- indices %>% 
   select(date,`RUSSELL 2000 - PRICE INDEX`) %>%
@@ -108,11 +112,18 @@ pe_m <- diageo_pe %>%
 Create a ts object of the monthly series using `ts()`, naming the new object `pe_m_ts`.
 **Hint:** to create a monthly `ts` object you need to know the starting date in `c(Year,Month)` numerical form.
 
+```{r setup1, include=FALSE}
+pe_m <- diageo_pe %>%
+  tq_transmute(select = PE,
+               mutate_fun = to.monthly)
+```
+
+
 ```{r pe_ts, exercise=TRUE}
 
 ```
 
-```{r pe_ts-solution}
+```{r pe_ts-solution,}
 head(pe_m)[1,1] # need to know what the start month is
 pe_m$PE %>% ts(frequency = 12,start = c(2010,1)) -> pe_m_ts
 ```
