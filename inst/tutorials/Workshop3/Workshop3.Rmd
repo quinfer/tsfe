@@ -1,5 +1,5 @@
 ---
-title: "Exploring financial time series"
+title: "Workshop 3: Exploring financial time series"
 output: 
   learnr::tutorial:
     progressive: true
@@ -10,17 +10,16 @@ description: ""
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(tsfe)
 library(tidyquant)
 library(tidyverse)
 library(fpp2)
 library(lubridate)
-knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
 
 ```
 
 
-```{r data setup, eval=TRUE}
+```{r data setup, eval=TRUE, warning=FALSE}
 library(tsfe)
 data("diageo_pe")
 pe_m <- diageo_pe %>%
