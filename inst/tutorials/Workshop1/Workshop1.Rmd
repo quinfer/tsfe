@@ -17,7 +17,7 @@ library(learnr)
 library(tidyverse)
 library(nycflights13)
 library(Lahman)
-tutorial_options(exercise.timelimit = 60)
+tutorial_options(exercise.timelimit = 60,exercise.eval = TRUE)
 knitr::opts_chunk$set(error = TRUE)
 ```
 

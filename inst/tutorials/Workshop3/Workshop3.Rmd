@@ -5,7 +5,7 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
-description: ""
+description: " An exploration of the time series patterns that can be found in financial data, which can then be used to build dynamic models"
 ---
 
 ```{r setup, include=FALSE}
@@ -15,6 +15,7 @@ library(tidyverse)
 library(fpp2)
 library(lubridate)
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning=FALSE)
+tutorial_options(exercise.timelimit = 60,exercise.eval = TRUE)
 
 ```
 
@@ -86,7 +87,7 @@ The `rename` function creates a tidier variable name.
 
 Hit `Run Code` to load data
  
-```{r load data, echo=TRUE}
+```{r load_data, exercise=TRUE}
 data("diageo_pe")
 ```
 

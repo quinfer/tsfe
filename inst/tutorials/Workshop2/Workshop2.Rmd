@@ -15,6 +15,7 @@ library(tidyquant)
 library(fpp2)
 library(ggpmisc)
 library(tsfe)
+tutorial_options(exercise.timelimit = 60,exercise.eval = TRUE)
 knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
 data("ftse350")
 ```
