@@ -80,8 +80,7 @@ library(fpp2)
 
 
 ```{r summarise, exercise = TRUE}
-tsfe::ftse350
-ftse350 %>% glimpse
+tsfe::ftse350 %>% glimpse
 ```
 
 
