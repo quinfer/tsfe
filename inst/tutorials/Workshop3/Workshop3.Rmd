@@ -2,7 +2,7 @@
 title: "Exploring financial time series"
 output: 
   learnr::tutorial:
-    progressive: false
+    progressive: true
     allow_skip: true
 runtime: shiny_prerendered
 description: ""
@@ -155,7 +155,7 @@ quiz(caption = "Practical Knowledge Quiz",
     answer("FTSE all share Index"),
     answer("Dow Jone Index"),
     answer("Russell 2000 Index", correct = TRUE),
-    answer("")
+    answer("DAX")
   ),
   question("Which of the R packages listed below are used to create plots?",
     answer("ggpmisc", correct = TRUE),
@@ -210,7 +210,7 @@ head(us_smcap_m)
 us_smcap_m %>% 
   select(simple_return) %>%
   drop_na() %>%
-  ts(frequency = 12,start = c(1988,3)) -> us_smcap_m_ts
+  ts(frequency = 12,start = c(1988,2)) -> us_smcap_m_ts
 ```
 
 ### Exercise 7
