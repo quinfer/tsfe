@@ -2,7 +2,7 @@
 title: "Exploring financial time series"
 output: 
   learnr::tutorial:
-    progressive: true
+    progressive: false
     allow_skip: true
 runtime: shiny_prerendered
 description: ""
@@ -16,9 +16,11 @@ library(tidyverse)
 library(fpp2)
 library(lubridate)
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
 ```
 
-```{r data setup, echo=FALSE, warning=FALSE}
+
+```{r data setup, eval=TRUE}
 library(tsfe)
 data("diageo_pe")
 pe_m <- diageo_pe %>%
@@ -45,7 +47,6 @@ us_smcap_m %>%
   select(simple_return) %>%
   drop_na() %>%
   ts(frequency = 12,start = c(1988,3)) -> us_smcap_m_ts
-
 ```
 
 
