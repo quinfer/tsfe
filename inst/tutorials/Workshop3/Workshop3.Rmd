@@ -90,11 +90,6 @@ data("diageo_pe")
 
 
 ```{r monthly, exercise=TRUE}
-
-```
-
-
-```{r monthly-solution}
 pe_m <- diageo_pe %>%
   tq_transmute(select = PE,
                mutate_fun = to.monthly)
