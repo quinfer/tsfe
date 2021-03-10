@@ -28,5 +28,7 @@ usethis::use_data(unilever_eps_ts,overwrite = TRUE)
 
 ### FTSE 350 prices and market cap
 readRDS('data-raw/ftse350.rds')->ftse350
-ftse350 %>% dplyr::distinct(ticker,variable,date)->ftse350
+ftse350 %>% 
+  distinct(ticker,variable,date,.keep_all=TRUE) %>%
+  select(-wk_id)->ftse350
 usethis::use_data(ftse350,overwrite = TRUE)
