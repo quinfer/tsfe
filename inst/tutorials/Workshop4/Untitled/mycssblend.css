@@ -1,0 +1,430 @@
+:root {
+  --color-salt: #61acf0; /* blue */
+  --color-fat: #f0a561; /* orange */
+  --color-acid: #cbd20a; /* lime */
+  --color-heat: #e74a2f; /* red */
+  --color-black: #1a1917; /* black */
+}
+
+.large { 
+  font-size: 160%;
+}
+.small { 
+  font-size:70%;
+}
+
+.salt {
+  color: var(--color-salt);
+  font-size: 200%; 
+  font-weight:700;
+}
+
+.fat {
+  color: var(--color-fat);
+  font-size: 200%; 
+  font-weight:700;
+}
+
+.acid {
+  color: var(--color-acid);
+  font-size: 200%;
+  font-weight:700;
+}
+
+.heat {
+  color: var(--color-heat);
+  font-size: 200%;
+  font-weight:700;
+}
+
+.saltinline {
+  color: var(--color-salt);
+}
+
+.fatinline {
+  color: var(--color-fat);
+}
+
+.acidinline {
+  color: var(--color-acid);
+}
+
+.heatinline {
+  color: var(--color-heat);
+}
+
+
+/* highlighted code */
+
+.remark-code-line-highlighted {
+  background-color: rgba(97, 172, 240, .5);
+}
+
+/* in line code */
+
+.remark-code, .remark-inline-code {
+  color: var(--color-heat);
+}
+
+/* from emi tanaka's ninjutsu css! */
+
+.img-fill img { object-fit: fill; height:100%; width:100%; overflow: hidden;}
+.img-contain img { object-fit: contain; height:100%; width:100%;  overflow: hidden}
+.img-cover img { object-fit: cover; height:100%; width:100%;  overflow: hidden}
+.img-none img { object-fit: none; height:100%; width:100%; }
+
+/* from lucy's css!
+
+ol {
+  max-width: 350px;
+  counter-reset: my-counter;
+  list-style: none;
+  padding-left: 40px;
+}
+ol li {
+  counter-increment: my-counter;
+  position: relative;
+  margin: 20px 0;
+}
+ol li::before {
+  content: counter(my-counter);
+  color: #fff;
+  font-weight: bold;
+  position: absolute;
+  left: -60px;
+  width: 9%;
+  height: 0;
+  padding-bottom: 9%;
+  line-height: 1em;
+  margin-top: -0.5em;
+  background: var(--color-fat);
+  border-radius: 50%;
+  text-align: center;
+}
+*/
+
+.inverse {
+  background-color: var(--color-black);
+  text-shadow: 0 0 0;
+}
+
+.title-slide {
+  background-image: url(img/title-slide-img.png);
+  background-size: cover;
+}
+
+.title-slide h1 {
+  text-shadow: none;
+  color: #F7F8FA;
+  margin-top: -70px;
+}
+
+.title-slide h2, .title-slide h3 {
+  color: #e7e8e2; 
+  line-height: 1.5em;
+}
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+
+
+/* links */
+					 
+a,
+a:visited {
+  color: var(--color-black);
+  border-bottom: 1px solid var(--color-salt);
+  box-shadow: inset 0 -2px 0 var(--color-salt);
+}
+
+a:hover,
+a:focus {
+  color: var(--color-black);
+  background: rgba(97, 172, 240, .5);
+  border-bottom: none;
+}
+
+a > code {
+  color: var(--color-heat);
+  text-decoration: none;
+}
+
+.inverse a {
+  color: #FFF;
+}
+
+.remark-inline-code {
+  color: var(--color-heat);
+  text-decoration: none;
+}
+
+/* from the hygge css! */
+
+.polaroid img {
+    display: block; 
+    width: inherit; 
+    border: 10px solid #fff;
+    border-bottom: 45px solid #fff;
+    -webkit-box-shadow: 3px 3px 3px #111;
+    -moz-box-shadow: 3px 3px 3px #111;
+    box-shadow: 3px 3px 3px #111;
+}
+
+/* footer */
+
+div.my-footer {
+    background-color: #1a1917;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 20px;
+    width: 100%;
+}
+
+div.my-footer span {
+    font-size: 10pt;
+    color: #F7F8FA;
+    position: absolute;
+    left: 15px;
+    bottom: 2px;
+}
+
+.remark-slide-number {
+  bottom: 18px;
+  opacity: 0.5;
+  position: absolute;
+  right: 20px;
+}
+
+img.circle {
+  border-radius:50%;
+}
+
+/* split rows*/
+
+
+.title-slide .remark-slide-number { 
+  display: none; 
+}
+
+.wrapper {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  place-items: center;
+  place-content: center;	
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.top-left {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  background-color: var(--color-salt);
+}
+
+.top-right {
+  grid-row: 1 / 2;
+  grid-column: 3 / 4;
+  background-color: var(--color-fat);
+}
+
+.bottom-left {
+  grid-row: 3 / 4;
+  grid-column: 1 / 2;
+  background-color: var(--color-acid);
+}
+
+.bottom-right {
+  grid-row: 3 / 4;
+  grid-column: 3 / 4;
+  background-color: var(--color-heat);
+}
+
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+
+pre {
+  background: #f8f8f8; /* match github highlightjs */
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+img.lil {
+  width: 15%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* USYD blockquote */
+blockquote, .blockquote {
+  display: block;
+  margin-top: 0.1em;
+  margin-bottom: 0.2em;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-left: solid 10px #0148A4;
+  border-top: solid 2px #0148A4;
+  border-bottom: solid 2px #0148A4;
+  border-right: solid 2px #0148A4;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+  /* background-color: #e64626; */
+  color: #e64626;
+  padding: 0.5em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.blockquote p {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h1:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h2:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h3:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h4:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+/*************************
+  Custom classes 
+**************************/
+
+/* Glow text class
+https://www.w3schools.com/howto/howto_css_glowing_text.asp
+*/
+
+.glow {
+  font-size: 200%; 
+  font-weight:700;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+.glowinline {
+  font-size: 100%;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+
+.pull-left-2 {
+  float: left;
+  width: 60%;
+}
+.pull-right-1 {
+  float: right;
+  width: 36%;
+}
+
+.pull-left-1 {
+  float: left;
+  width: 36%;
+}
+.pull-right-2 {
+  float: right;
+  width: 60%;
+}
+
+/******************
+ * Coloured content boxes
+ ****************/
+.content-box { 
+    box-sizing: border-box;
+    background-color: #e2e2e2;
+}
+.content-box-blue,
+.content-box-gray,
+.content-box-grey,
+.content-box-army,
+.content-box-green,
+.content-box-purple,
+.content-box-red,
+.content-box-yellow {
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin: 0 0 15px;
+  overflow: hidden;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
+}
+.content-box-blue { background-color: #F0F8FF; }
+.content-box-gray { background-color: #e2e2e2; }
+.content-box-grey {	background-color: #F5F5F5; }
+.content-box-army {	background-color: #737a36; }
+.content-box-green { background-color: #d9edc2; }
+.content-box-purple { background-color: #e2e2f9; }
+.content-box-red { background-color: #ffcccc; }
+.content-box-yellow { background-color: #fef5c4; }
+.content-box-blue .remark-inline-code,
+.content-box-blue .remark-inline-code,
+.content-box-gray .remark-inline-code,
+.content-box-grey .remark-inline-code,
+.content-box-army .remark-inline-code,
+.content-box-green .remark-inline-code,
+.content-box-purple .remark-inline-code,
+.content-box-red .remark-inline-code,
+.content-box-yellow .remark-inline-code { 
+  background: none;
+}
+
+.full-width {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+
+
+/***********
+ Changed CSS
+ **************/
+
+.opacity{ opacity: 0.5; }
+.blur {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+.grayscale img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}

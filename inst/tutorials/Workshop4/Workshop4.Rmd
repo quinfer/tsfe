@@ -1,12 +1,17 @@
 ---
 title: "linear regression models"
-output: learnr::tutorial
+output:
+  learnr::tutorial:
+    css: 'css/mycssblend.css'
+description: "Learn how to sensibly build, interpret and predict from simple linear regression models"
 runtime: shiny_prerendered
+
 ---
 
 ```{r setup, include=FALSE}
 library(learnr)
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE, message=FALSE)
+tutorial_options(exercise.eval = "TRUE")
 library(fpp2)
 library(tidyverse)
 library(broom)
@@ -34,7 +39,7 @@ library(car)
 library(tsfe) # version 1.0.1
 ```
 
-## Seasonal regression predictors
+## linear regressions and uncertainty
 
 Seasonal effects or **calendar anomalies** in financial markets have been the subject of much research, especially the equity markets.They manifest as the tendency of financial returns to display systematic patterns at certain times of the day, week or year.As we have seen in in week 2 one of the most important such anomalies is the “day of the week effect”, which is well documented in the financial literature. The existence of such effects is a direct contradiction of weak form market efficiency.
 
@@ -45,7 +50,7 @@ One of the simplest ways to model seasonality is using dummy variables in a regr
 
 ### a) create log returns
 
-Create a daily Russell 2000 price index from `tsfe::indices`. Add a log_return variable and a day of the week variable using the function `weekdays()`.  Use the following code to create these variables.  
+>Create a daily Russell 2000 price index from `tsfe::indices`. Add a log_return variable and a day of the week variable using the function `weekdays()`.  Use the following code to create these variables.  
 
 >Hint:`weekdays` extracts the day of the week from a date variable and the `abbreviate=TRUE` option adds a text abbreviation.
 
@@ -60,40 +65,56 @@ tsfe::indices %>%
 
 ### b) autocorrelation
 
-Is there any daily seasonality present in the autocorrelations of the daily log returns of the Russell 2000 index? 
+>Is there any daily seasonality present in the autocorrelations of the daily log returns of the Russell 2000 index? 
 >Hint: Use `ggAcf`
 
-```{r acf, exercise=TRUE,excercise.setup="returns"}
+```{r acf, exercise=TRUE,exercise.setup="returns"}
 ggAcf(r2000_d$log_return)
 ```
 
 ### c) boxplot
-Create a Boxplot of the returns for each day of the week and discuss your results.
+>Create a Boxplot of the returns for each day of the week and discuss your results.
 
 ```{r boxplot, exercise=TRUE,exercise.setup="returns"}
 r2000_d %>% ggplot(aes(y=log_return,x=day_of_week)) + geom_boxplot()
 ```
 
 ### d) seasonal predictor regression
-Using the the `lm()` command find a regression model for daily log returns of the Russell 2000 Index with only each day of the week as a predictor.  Which day of the week produces the largest return?
+>Using the the `lm()` command find a regression model for daily log returns of the Russell 2000 Index with only each day of the week as a predictor.  Which day of the week produces the largest return?
 
 ```{r regression1,exercise=TRUE,exercise.setup="returns"}
-model1<-lm(log_return~day_of_week,r2000_d)
-(m<-model1 %>% tidy(conf.int=TRUE))
-m %>% kable(digits=5) %>% kable_classic_2()
+model1 <- lm(log_return~day_of_week,r2000_d)
+m <- tidy(model1,conf.int=TRUE)
+m %>% 
+  kable(digits=5) %>% 
+  kable_classic_2()
 ```
-The intercept can be interpreted as the average return on the Russell 2000 index on a Friday, 0.0006 and the Monday coefficient is  the average difference between Friday and Monday's returns `r round(m$estimate[1]+m$estimate[2],5)`.  The standard error is the standard deviation of the parameter estimates and gives a sense of the uncertainty of the parameter and can be used to construct simple significant tests and confidence intervals.  To understand if this difference is statistically significant we can also perform a simple F test of a Null of no difference.  Specifically, testing whether two coefficients are equal (i.e. they have zero difference) requires the use of formula $Var(A-B)=Var(A)+Var(B)-2 \times Cov(A,B)$.  In `R` we can use a linear restriction test in the `car` package to test this difference. 
+.content-box-yellow{The intercept can be interpreted as the average return on the Russell 2000 index on a Friday, 0.0006 and the Monday coefficient is  the average difference between Friday and Monday's returns -0.00061.  The standard error is the standard deviation of the parameter estimates and gives a sense of the uncertainty of the parameter and can be used to construct simple significant tests and confidence intervals.  To understand if this difference is statistically significant we can also perform a simple F test of a Null of no difference.  Specifically, testing whether two coefficients are equal (i.e. they have zero difference) requires the use of formula $Var(A-B)=Var(A)+Var(B)-2 \times Cov(A,B)$.  In `R` we can use a linear restriction test in the `car` package to test this difference.}
 
 ### e) hypothesis testing paramater differences
 
 Roughly speaking we can therefore say that the standard error of the difference in two parameter is $SE_{A-B}=\sqrt{(SE_A^2+SE_B^2} $ assuming the parameter estimates are uncorrelated.  While this latter assume is technically wrong is most practical applications this may not matter.
+>Test hypothesis of no difference
+
 ```{r ftest, exercise=TRUE,exercise.setup="regression1"}
 linearHypothesis(model1,"(Intercept)=day_of_weekMon",test="F")
 ```
 
+.content-box-yellow[ If we have assume the model is valid ,then the above hypothesis test suggests that there is a significant difference between Friday's and Monday's returns.]
 
-### f) visualise regression parameter uncertainty
-Statistics is about uncertainty and variation.  The the crisis around the misuse of p-values in finance, it is more important than every to report coherent estimates of uncertainty for regression output.  One way to do this is to visualise confidence intervals for the parameter estimates.
+### f) diagnostics
+>How would you validate your inference from the previous model? HINT: Are the residuals adequate?
+
+```{r residualcheck,exercise=TRUE,exercise.setup="regression1"}
+checkresiduals(model1)
+```
+
+.content-box-yellow[The serial correlation in the residuals is significant, and thus our previous hypothesis test is invalid.]
+
+### f) Frequentist parameter uncertainty
+Statistics is about uncertainty and variation.  The the crisis around the misuse of p-values in finance, it is more important than every to report coherent estimates of uncertainty for regression output.  
+
+>Visualise confidence intervals for the parameter estimates.
 
 ```{r viz-ci,exercise=TRUE, exercise.setup="regression1"}
 ggplot(m, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
@@ -102,43 +123,292 @@ ggplot(m, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_errorbarh() +
   ggtitle("Regression parameter estimateis with 95% CIs")
 ```
-### g) Bayesian inference
+.content-box-yellow[Non-overlapping confidence intervals is another visual technique of testing the difference between parameter estimates (again under the assumption the model is correct)]
+
+### g) Bayesian inference example
 
 >Bayesian inference involves three steps that go beyond classical estimation. First, the data and model are combined to form a posterior distribution, which we typically summarize by a set of simulations of the parameters in the model. Second, we can propagate uncertainty in this distribution–that is, we can get simulation-based predictions for unobserved or future outcomes that account for uncertainty in the model parameters. Third, we can include additional information into the model using a prior distribution.- [Gelman, A., Hill, J., & Vehtari, A. (2020). Prediction and Bayesian inference. In Regression and Other Stories (Analytical Methods for Social Research, pp. 113-130). Cambridge: Cambridge University Press. doi:10.1017/9781139161879.010](https://doi-org.queens.ezp1.qub.ac.uk/10.1017/9781139161879.010)
 
 Bayesian inference allows us to incorporating model uncertainty as well as estimation uncertainty in a linear regression.
 
-```{r bayesregression, exercise=TRUE, exercise.setup="return"}
+```{r bayesregression, exercise=TRUE, exercise.setup="returns"}
 (model2<-stan_glm(log_return~day_of_week,data=r2000_d))
+```
+
+You will notice the model is run via a Markov Chain Monte Carlo sampling algorithm, which produces probabilistic output.  We can then visualise this output using the following.
+
+```{r plotuncertainty, exercise=TRUE,exercise.setup="bayesregression"}
 posterior <- as.matrix(model2)
-plot_title <- ggtitle("Posterior distributions",
-                      "with medians and 95% intervals")
+plot_title <- ggtitle("Posterior distributions","with medians and 95% intervals")
 mcmc_areas(posterior, 
            pars=c("(Intercept)","day_of_weekMon",
                   "day_of_weekThu","day_of_weekTue","day_of_weekWed"),
            prob = 0.95) + plot_title
 ```
-We can see that when we consider model uncertainty Monday and the Intercept have 95% credible intervals which include zero suggesting more uncertainty than the OLS regression provided. 
 
-### Quiz
+.content-box-yellow[We can see that when we consider model uncertainty Monday and the Intercept have 95% credible intervals which include zero suggesting more uncertainty than the OLS regression provided.] 
 
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
 
-Some questions to verify that you understand the purposes of various base and recommended R packages:
+## Energy demand linear regression
+Daily electricity demand for Victoria, Australia, during 2014 is contained in `elecdaily`. The data for the first 20 days can be obtained as follows.
 
-```{r quiz}
-quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
-  ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
-  )
-)
+```{r setup1, exercise=TRUE}
+daily20 <- head(elecdaily,20)
 ```
+
+### a) visualise linear relationship  
+>Plot the data and find the regression model for Demand with temperature as an explanatory variable. What is the relationship between demand and temperature?
+
+```{r plotelec, exercise=TRUE,exercise.setup="setup1"}
+daily20 %>%
+  as.data.frame() %>%
+  ggplot(aes(x = Temperature, y = Demand)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+.content-box-yellow[There is a positive relationship between temperature and electricity consumption.]
+
+### b) fit regression
+>Fit a linear regression model to the previously visualised relationship and display the results. Why is there a positive relationship? 
+
+```{r regression2, exercise=TRUE,exercise.setup="setup"}
+(fit <- tslm(Demand ~ Temperature, data = daily20))
+```
+
+ Given the time of year, and the recorded temperature values, it is likely that electricity is being used for air conditioners. Since higher temperatures mean a higher demand for cooling, this leads to a positive relationship between temperature and electricity consumption.
+
+
+### c) diagnostics
+>Produce a residual plot. Is the model adequate? Are there any outliers or influential observations?
+
+```{r diagnostics2,exercise=TRUE,exercise.setup="regression2"}
+checkresiduals(fit)
+
+```
+
+.content-box-yellow[Although the ACF tests are passed, there is a linear trend in the residuals. So the model looks inadequate and perhaps using an additional time trend predictor will improve the model.] 
+
+### d) forecast 
+>Ignoring the modelling inadequacies for now, use the model to forecast the electricity demand that you would expect for the next day if the maximum temperature was $15^\circ$ and compare it with the forecast if the with maximum temperature was $35^\circ$. Do you believe these forecasts?
+
+```{r forecast1, exercise=TRUE,exercise.setup="regression2"}
+(fc <- forecast(fit, newdata=data.frame(Temperature=c(15,35))))
+```
+
+.content-box-yellow[The prediction for $35^\circ$ looks reasonable, but the one for $15^\circ$ assumes the trend continues to decrease for temperature values lower than 20, which is unlikely. Heating will mean it will increase for lower temperatures.]
+
+### e) Is a linear model appropriate? 
+
+>Plot Demand vs Temperature for all of the available data in `elecdaily`. What does this say about your model?
+
+```{r, cache=TRUE}
+elecdaily %>%
+  as.data.frame() %>%
+  ggplot(aes(x = Temperature, y = Demand)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+.content-box-yellow[This shows the non-linear relationship clearly. Even limiting the data to above 20, there is a non-linear relationship between demand and temperature. The model is inadequate.]
+
+## linear trend regressions
+Data set `mens400` contains the winning times (in seconds) for the men's 400 meters final in each Olympic Games from 1896 to 2016.
+
+### a) Visualise over time
+
+>Plot the winning time against the year. Describe the main features of the scatterplot.
+*`qplot` is a quick way to draw a scatterplot without make a `tibble`*
+
+```{r viz400,exercise=TRUE}
+qplot(time(mens400),mens400) + 
+  labs(y="Winning time",x="year",
+       title = "Mens 400 metres Olympics")
+```
+
+.content-box-yellow[After an initial outlier, the plot shows linear relationship between **Year** and **time** for years in range from 1900 to about 1976. Data for years from 1980 show a smaller trend.]
+
+### b) Fit linear regression
+>Fit a regression line to the data. Obviously the winning times have been decreasing, but at what *average* rate per year?
+
+```{r mens400reg,exercise=TRUE}
+timetrend <- time(mens400)
+fit <- tslm(mens400 ~ timetrend)
+qplot(time(mens400), mens400) +
+  labs(y="Winning time",x="year",
+       title = "Mens 400 metres Olympics",
+       subtitle = "with regression line") +
+  geom_smooth(method='lm')
+```
+
+.content-box-yellow[The average change per year is the value from the time trend coefficient estimate in second per year.]
+
+### c) Diagnostics
+>Plot the residuals against the year. What does this indicate about the suitability of the fitted line?
+
+```{r diagnostics3, exercise=TRUE,exercise.setup="mens400reg"}
+qplot(time(mens400), residuals(fit)) +
+  geom_hline(yintercept=0, col='grey')
+```
+
+.content-box-yellow[There is an outlier at year 1896 and a change in trend at around 1980 (shown by the positive residuals after that time. So the linear model is not a good choice.]
+
+### d) forecast using new data
+>Ignoring the modelling inadequacies for now,predict the winning time for the men's 400 meters final in the 2020 Olympics. Give a prediction interval for your forecasts. What assumptions have you made in these calculations?
+
+**For users of forecast 8.4 or earlier, it is necessary to use `lm()` to do the forecasting due to issues with missing values**
+
+```{r forecastnew, exercise=TRUE,exercise.setup='mens400reg'}
+forecast(fit, newdata=data.frame(timetrend=2020))
+```
+
+.content-box-yellow[The above calculations are made with the assumption that the men's 400 metres Olympics final results change on average with constant rate. This is unlikely, especially given the obvious change in slope in the data. The actual winning time is likely to be much higher than what has been forecast.]
+
+## Beer demand
+
+### a) Visualise
+>Type `easter(ausbeer)` and interpret what you see.
+
+```{r beer, exercise=TRUE}
+easter(ausbeer)
+```
+
+.content-box-yellow[This gives the proportion of Easter in each quarter. Easter is defined as including Good Friday, Easter Saturday, and Easter Sunday.]
+
+## Theoretical question
+An elasticity coefficient is the ratio of the percentage change in the forecast variable ($y$) to the percentage change in the predictor variable ($x$). Mathematically, the elasticity is defined as $(dy/dx)\times(x/y)$. Consider the log-log model,
+
+ $$\log y=\beta_0+\beta_1 \log x + \varepsilon$$
+
+>Express $y$ as a function of $x$ and show that the coefficient $\beta_1$ is the elasticity coefficient.
+
+### Answer
+
+.content-box-yellow[
+We will take conditional expectation of the left and the right parts of the equation:
+$$\mathrm{E}(\log(y)\mid x) = \mathrm{E}(\beta_0 + \beta_1 \log(x) + \varepsilon\mid x) = \beta_0 + \beta_1\log(x).$$
+By taking derivatives of the left and the right parts of the last equation we get:
+$\frac{y'}{y} = \frac{\beta_1}{x}$, and then $\beta_1 = \frac{y' x}{y}.$
+It is exactly what we need to prove, taking into account that
+$y' = \frac{dy}{dx}$.
+]
+
+
+## Sales data
+
+The data set `fancy` concerns the monthly sales figures of a shop which opened in January 1987 and sells gifts, souvenirs, and novelties. The shop is situated on the wharf at a beach resort town in Queensland, Australia. The sales volume varies with the seasonal population of tourists. There is a large influx of visitors to the town at Christmas and for the local surfing festival, held every March since 1988. Over time, the shop has expanded its premises, range of products, and staff.
+
+### a) Visualise
+
+>Produce a time plot of the data and describe the patterns in the graph. Identify any unusual or unexpected fluctuations in the time series.
+
+```{r fancy, exercise=TRUE}
+autoplot(fancy) +
+  xlab("Year") + ylab("Sales")
+```
+
+.content-box-yellow[
+Features of the data:
+
+* Seasonal data -- similar scaled pattern repeats every year
+* A spike every March (except for year 1987) is the influence of the surfing festival
+* The size of the pattern increases proportionally to the level of sales
+]
+
+### b) Transform
+
+>Explain why it is necessary to take logarithms of these data before fitting a model.
+
+*HINT:The last feature above suggests taking logs to make the pattern (and variance) more stable*
+
+```{r logsales, exercise=TRUE}
+# Taking logarithms of the data
+autoplot(log(fancy)) + ylab("log Sales")
+```
+
+.content-box-yellow[After taking logs, the trend looks more linear and the seasonal variation is roughly constant.]
+
+### c) fit linear regression
+
+>Use `R` to fit a regression model to the logarithms of these sales data with a linear trend, seasonal dummies and a "surfing festival" dummy variable.
+
+```{r fitit,exercise=TRUE}
+#Create festival dummy:
+festival <- cycle(fancy) == 3
+festival[3] <- FALSE
+
+# Fit linear model to logged data (by specifying lambda=0)
+fit <- tslm(fancy ~ trend + season + festival, lambda = 0)
+
+# Check fitted values
+autoplot(fancy) + ylab("Sales") +
+  autolayer(fitted(fit), series="Fitted")
+```
+
+### d) Diagnostics
+
+>Plot the residuals against time and against the fitted values. Do these plots reveal any problems with the model?
+
+```{r diagnostics4, exercise=TRUE, exercise.setup="fitit"}
+autoplot(residuals(fit))
+
+qplot(fitted(fit), residuals(fit))
+```
+
+.content-box-yellow[The residuals may be serially correlated (more robust testing is required). They reveal non-linearity in the trend.  There are no problems apparent in graph against fitted values.]
+
+### e) Boxplot residuals
+
+>Do boxplots of the residuals for each month. Does this reveal any problems with the model?
+
+```{r box-res, exercise=TRUE, exercise.setup="fitit"}
+month <- factor(cycle(residuals(fit)), labels=month.abb)
+ggplot() + geom_boxplot(aes(x=month, y=residuals(fit), group=month))
+```
+
+.content-box-yellow[The boxplot does not reveal any problems except heteroscedasticity (unstable variance)]
+
+### f) coefficient estimate inference. 
+
+>What do the values of the coefficients tell you about each variable?
+
+```{r coeffs,exercise=TRUE, exercise.setup="fitit"}
+coefficients(fit)
+```
+.content-box-yellow[
+* `(Intercept)` is not interpretable.
+* `trend` coefficient shows that with every year logarithm of sales increases on average by 0.02.
+* `season2` coefficient shows that in February logarithm of sales increases compare to January on average by 0.25.
+* `season12` coefficient shows that in December logarithm of sales increases compare to January on average by 1.96.
+* `festivalTRUE` coefficient shows that with surfing festival logarithm of sales increases compare to months without the festival on average by 0.5.
+]
+### g) regression serial correlation
+What does the Breusch-Godfrey test tell you about your model?
+
+```{r BG, exercise=TRUE, exercise.setup="fitit"}
+checkresiduals(fit,plot = FALSE)
+```
+
+The serial correlation in the residuals is significant.
+
+### h) Forecast
+
+>Regardless of your answers to the above questions, use your regression model to predict the monthly sales for 1994, 1995, and 1996. Produce prediction intervals for each of your forecasts.
+
+```{r forecast2, exercise=TRUE, exercise.setup="fitit"}
+future.festival <- rep(FALSE, 36)
+future.festival[c(3, 15, 27)] <- TRUE
+fit %>%
+  forecast(h=36, newdata=data.frame(festival = future.festival)) %>%
+  autoplot
+```
+
+### i) original scale forecasts
+
+>Transform your predictions and intervals to obtain predictions and intervals for the raw data.
+
+*This was done automatically because I used `lambda=0` inside `tslm`.*
+
+### j) How could you improve these predictions by modifying the model?
+
+.content-box-yellow[The model can be improved by taking into account non-linearity of the trend.  Perhaps by including a squared time trend.]
