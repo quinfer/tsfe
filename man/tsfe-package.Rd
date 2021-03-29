@@ -4,7 +4,7 @@
 \name{tsfe-package}
 \alias{tsfe}
 \alias{tsfe-package}
-\title{tsfe: What the Package Does (One Line, Title Case)}
+\title{tsfe: Time series financial econometrics}
 \description{
 used to teach time series financial econometrics.
 }

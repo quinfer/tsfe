@@ -25,7 +25,16 @@ library(bookdown) ## this needs to be installed to knit this document to a pdf f
 1. Update the author and title fields in the above YAML section.
 2. Edit the `refs.bib` file to include any extra references you have. 
 3. Click `Knit` to see what the output will look like
+  * Knit to pdf requres an installation of a latex engine for example [`tinytex`](https://yihui.org/tinytex/)
 4 . Save the .Rmd file using the naming convention specified in class
+
+### To get you started with R markdown
+
+* [R Markdown Quick Tour](https://rmarkdown.rstudio.com/authoring_quick_tour.html)
+* [Introduction to R Markdown](https://rmarkdown.rstudio.com/lesson-1.html)
+* [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+
 
 ## Introduction and critique
 
@@ -45,9 +54,13 @@ A detailed description of the data to include, the source, the format, the data 
 
 > **Tip**: Use clear and concise graphical representation as per the principles of [Edward Tufte](https://thedoublethink.com/tuftes-principles-for-visualizing-quantitative-information/).  Do not mechanically replicate the course material!  This is your chance to express your understanding of the techniques, their applications and their limitations. 
 
-## Results and discusssion
+## Results
 
 Results should be displayed professionally in tabulated or graph form, with emphasis on any interesting features. Inferences should be related to the original aims of the project and if the results are what was expected based on prior academic research.
+
+>**Tip**: The bland reporting of results without proper discussion and critique will score low in this section! Mention each table/figure explicitly in the text; poor referencing will also be penalised!. Results should be tabulated in a professional manner in line with a high-quality journal output.  Copy and paste shortcuts from statistical software is not professional and will be penalised.
+
+## Discussion
 
 In conclusion you should restate your original aim and outline the most important results, as well as the weaknesses in the study.  It is also important to state some directions for future research in the area.
 

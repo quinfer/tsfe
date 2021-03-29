@@ -1,6 +1,6 @@
 Package: tsfe
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Time series financial econometrics
+Version: 1.0.1
 Authors@R: 
     person(given = "Barry",
            family = "Quinn",
@@ -15,7 +15,4 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
-Suggests: 
-    learnr,
-    tibble,
-    fpp2
+Suggests: learnr,tibble,fpp2

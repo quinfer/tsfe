@@ -1,0 +1,144 @@
+---
+title: "linear regression models"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+library(fpp2)
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(rstanarm)
+library(bayesplot)
+library(car)
+```
+
+
+## Before you begin
+
+Make sure the following packages can be loaded
+
+```
+library(learnr)
+library(fpp2)
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(rstanarm)
+library(car)
+library(tsfe) # version 1.0.1
+```
+
+## Seasonal regression predictors
+
+Seasonal effects or **calendar anomalies** in financial markets have been the subject of much research, especially the equity markets.They manifest as the tendency of financial returns to display systematic patterns at certain times of the day, week or year.As we have seen in in week 2 one of the most important such anomalies is the “day of the week effect”, which is well documented in the financial literature. The existence of such effects is a direct contradiction of weak form market efficiency.
+
+These predictable patterns could be exploited in a trading strategy to achieve abnormal profits.Profitable trading strategies may be illusory in reality due to trading costs and the fact these effects may be attributed to time-varying stock market risk premiums.From a modelling perspective, if seasonality is ignored in $y_t$ it usually leads to autocorrelation of the order of the seasonality.
+* For example, this would be fifth order autocorrelation if $y_t$ is a series of daily returns. 
+
+One of the simplest ways to model seasonality is using dummy variables in a regression. The number of dummies required to model the seasonality depends on the frequency of the data
+
+### a) create log returns
+
+Create a daily Russell 2000 price index from `tsfe::indices`. Add a log_return variable and a day of the week variable using the function `weekdays()`.  Use the following code to create these variables.  
+
+>Hint:`weekdays` extracts the day of the week from a date variable and the `abbreviate=TRUE` option adds a text abbreviation.
+
+```{r returns, exercise=TRUE}
+tsfe::indices %>% 
+  select(`RUSSELL 2000 - PRICE INDEX`,date) %>% 
+  drop_na() %>%
+  rename(Price=`RUSSELL 2000 - PRICE INDEX`) %>%
+  mutate(log_return=log(Price)-log(lag(Price)),
+         day_of_week=weekdays(date,abbreviate=TRUE))->r2000_d
+```
+
+### b) autocorrelation
+
+Is there any daily seasonality present in the autocorrelations of the daily log returns of the Russell 2000 index? 
+>Hint: Use `ggAcf`
+
+```{r acf, exercise=TRUE,excercise.setup="returns"}
+ggAcf(r2000_d$log_return)
+```
+
+### c) boxplot
+Create a Boxplot of the returns for each day of the week and discuss your results.
+
+```{r boxplot, exercise=TRUE,exercise.setup="returns"}
+r2000_d %>% ggplot(aes(y=log_return,x=day_of_week)) + geom_boxplot()
+```
+
+### d) seasonal predictor regression
+Using the the `lm()` command find a regression model for daily log returns of the Russell 2000 Index with only each day of the week as a predictor.  Which day of the week produces the largest return?
+
+```{r regression1,exercise=TRUE,exercise.setup="returns"}
+model1<-lm(log_return~day_of_week,r2000_d)
+(m<-model1 %>% tidy(conf.int=TRUE))
+m %>% kable(digits=5) %>% kable_classic_2()
+```
+The intercept can be interpreted as the average return on the Russell 2000 index on a Friday, 0.0006 and the Monday coefficient is  the average difference between Friday and Monday's returns `r round(m$estimate[1]+m$estimate[2],5)`.  The standard error is the standard deviation of the parameter estimates and gives a sense of the uncertainty of the parameter and can be used to construct simple significant tests and confidence intervals.  To understand if this difference is statistically significant we can also perform a simple F test of a Null of no difference.  Specifically, testing whether two coefficients are equal (i.e. they have zero difference) requires the use of formula $Var(A-B)=Var(A)+Var(B)-2 \times Cov(A,B)$.  In `R` we can use a linear restriction test in the `car` package to test this difference. 
+
+### e) hypothesis testing paramater differences
+
+Roughly speaking we can therefore say that the standard error of the difference in two parameter is $SE_{A-B}=\sqrt{(SE_A^2+SE_B^2} $ assuming the parameter estimates are uncorrelated.  While this latter assume is technically wrong is most practical applications this may not matter.
+```{r ftest, exercise=TRUE,exercise.setup="regression1"}
+linearHypothesis(model1,"(Intercept)=day_of_weekMon",test="F")
+```
+
+
+### f) visualise regression parameter uncertainty
+Statistics is about uncertainty and variation.  The the crisis around the misuse of p-values in finance, it is more important than every to report coherent estimates of uncertainty for regression output.  One way to do this is to visualise confidence intervals for the parameter estimates.
+
+```{r viz-ci,exercise=TRUE, exercise.setup="regression1"}
+ggplot(m, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
+  geom_point() +
+  geom_vline(xintercept = 0, lty = 4) +
+  geom_errorbarh() +
+  ggtitle("Regression parameter estimateis with 95% CIs")
+```
+### g) Bayesian inference
+
+>Bayesian inference involves three steps that go beyond classical estimation. First, the data and model are combined to form a posterior distribution, which we typically summarize by a set of simulations of the parameters in the model. Second, we can propagate uncertainty in this distribution–that is, we can get simulation-based predictions for unobserved or future outcomes that account for uncertainty in the model parameters. Third, we can include additional information into the model using a prior distribution.- [Gelman, A., Hill, J., & Vehtari, A. (2020). Prediction and Bayesian inference. In Regression and Other Stories (Analytical Methods for Social Research, pp. 113-130). Cambridge: Cambridge University Press. doi:10.1017/9781139161879.010](https://doi-org.queens.ezp1.qub.ac.uk/10.1017/9781139161879.010)
+
+Bayesian inference allows us to incorporating model uncertainty as well as estimation uncertainty in a linear regression.
+
+```{r bayesregression, exercise=TRUE, exercise.setup="return"}
+(model2<-stan_glm(log_return~day_of_week,data=r2000_d))
+posterior <- as.matrix(model2)
+plot_title <- ggtitle("Posterior distributions",
+                      "with medians and 95% intervals")
+mcmc_areas(posterior, 
+           pars=c("(Intercept)","day_of_weekMon",
+                  "day_of_weekThu","day_of_weekTue","day_of_weekWed"),
+           prob = 0.95) + plot_title
+```
+We can see that when we consider model uncertainty Monday and the Intercept have 95% credible intervals which include zero suggesting more uncertainty than the OLS regression provided. 
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```
