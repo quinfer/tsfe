@@ -1,9 +1,9 @@
 ---
-title: "linear regression models"
+title: "linear regression uncertainty"
 output:
   learnr::tutorial:
-    css: 'css/mycssblend.css'
-description: "Learn how to sensibly build, interpret and predict from simple linear regression models"
+    css: ['css/mycssblend.css']
+description: "Learn how to sensibly build, interpret and predict from simple linear regression models with the emphasise on the uncertainty"
 runtime: shiny_prerendered
 
 ---
@@ -89,18 +89,24 @@ m %>%
   kable(digits=5) %>% 
   kable_classic_2()
 ```
-.content-box-yellow{The intercept can be interpreted as the average return on the Russell 2000 index on a Friday, 0.0006 and the Monday coefficient is  the average difference between Friday and Monday's returns -0.00061.  The standard error is the standard deviation of the parameter estimates and gives a sense of the uncertainty of the parameter and can be used to construct simple significant tests and confidence intervals.  To understand if this difference is statistically significant we can also perform a simple F test of a Null of no difference.  Specifically, testing whether two coefficients are equal (i.e. they have zero difference) requires the use of formula $Var(A-B)=Var(A)+Var(B)-2 \times Cov(A,B)$.  In `R` we can use a linear restriction test in the `car` package to test this difference.}
+<content-box class="content-box-yellow"> 
+The intercept can be interpreted as the average return on the Russell 2000 index on a Friday, 0.0006 and the Monday coefficient is  the average difference between Friday and Monday's returns -0.00061.  The standard error is the standard deviation of the parameter estimates and gives a sense of the uncertainty of the parameter and can be used to construct simple significant tests and confidence intervals.  To understand if this difference is statistically significant we can also perform a simple F test of a Null of no difference.  Specifically, testing whether two coefficients are equal (i.e. they have zero difference) requires the use of formula $Var(A-B)=Var(A)+Var(B)-2 \times Cov(A,B)$.  In `R` we can use a linear restriction test in the `car` package to test this difference.</content-box>
 
 ### e) hypothesis testing paramater differences
 
-Roughly speaking we can therefore say that the standard error of the difference in two parameter is $SE_{A-B}=\sqrt{(SE_A^2+SE_B^2} $ assuming the parameter estimates are uncorrelated.  While this latter assume is technically wrong is most practical applications this may not matter.
+Roughly speaking we can therefore say that the standard error of the difference in two parameter is $SE_{A-B}=\sqrt{(SE_A^2+SE_B^2} $ assuming the parameter estimates are uncorrelated.  While this latter assume is technically wrong in most practical applications this may not matter. 
+
+**Importantly, all null hypothesis testing results are only valid, if the underlying model from which the test statistics are derived is valid**
+
 >Test hypothesis of no difference
 
 ```{r ftest, exercise=TRUE,exercise.setup="regression1"}
 linearHypothesis(model1,"(Intercept)=day_of_weekMon",test="F")
 ```
 
-.content-box-yellow[ If we have assume the model is valid ,then the above hypothesis test suggests that there is a significant difference between Friday's and Monday's returns.]
+<content-box class="content-box-yellow"> 
+If we have assume the model is valid ,then the above hypothesis test suggests that there is a significant difference between Friday's and Monday's returns 
+</content-box>
 
 ### f) diagnostics
 >How would you validate your inference from the previous model? HINT: Are the residuals adequate?
@@ -109,7 +115,7 @@ linearHypothesis(model1,"(Intercept)=day_of_weekMon",test="F")
 checkresiduals(model1)
 ```
 
-.content-box-yellow[The serial correlation in the residuals is significant, and thus our previous hypothesis test is invalid.]
+<content-box class="content-box-yellow">The serial correlation in the residuals is significant, and thus our previous hypothesis test is invalid.</content-box>
 
 ### f) Frequentist parameter uncertainty
 Statistics is about uncertainty and variation.  The the crisis around the misuse of p-values in finance, it is more important than every to report coherent estimates of uncertainty for regression output.  
@@ -123,7 +129,7 @@ ggplot(m, aes(estimate, term, xmin = conf.low, xmax = conf.high, height = 0)) +
   geom_errorbarh() +
   ggtitle("Regression parameter estimateis with 95% CIs")
 ```
-.content-box-yellow[Non-overlapping confidence intervals is another visual technique of testing the difference between parameter estimates (again under the assumption the model is correct)]
+<content-box class="content-box-yellow">Roughly speaking non-overlapping confidence intervals is another visual statistical argument that there may be a significant difference between mean returns on Monday and Fridays (assumption the model is valid).  Important [overlapping CIs](https://www.cscu.cornell.edu/news/statnews/73_ci.pdf) do not necessary mean that there is no significant difference and this is a good example of the frail [**straw-man** nature of NHST](https://stat.columbia.edu/~gelman/research/published/asa_pvalues.pdf) </content-box>
 
 ### g) Bayesian inference example
 
@@ -137,7 +143,16 @@ Bayesian inference allows us to incorporating model uncertainty as well as estim
 
 You will notice the model is run via a Markov Chain Monte Carlo sampling algorithm, which produces probabilistic output.  We can then visualise this output using the following.
 
-```{r plotuncertainty, exercise=TRUE,exercise.setup="bayesregression"}
+```{css, echo=FALSE, eval=TRUE}
+.scroll-50 {
+  max-height: 50px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+```
+
+
+```{r plotuncertainty, exercise=TRUE,exercise.setup="bayesregression", class.source="scroll-50"}
 posterior <- as.matrix(model2)
 plot_title <- ggtitle("Posterior distributions","with medians and 95% intervals")
 mcmc_areas(posterior, 
@@ -146,7 +161,7 @@ mcmc_areas(posterior,
            prob = 0.95) + plot_title
 ```
 
-.content-box-yellow[We can see that when we consider model uncertainty Monday and the Intercept have 95% credible intervals which include zero suggesting more uncertainty than the OLS regression provided.] 
+<content-box class="content-box-yellow">We can see that when we consider model uncertainty Monday and the Intercept have 95% credible intervals which include zero suggesting more uncertainty than the OLS regression provided.  Recall there is no free lunch here, the additional flexible of a generative bayesian model comes at the expense of additional prior assumptions.</content-box>
 
 
 ## Energy demand linear regression
@@ -167,7 +182,7 @@ daily20 %>%
     geom_smooth(method = "lm", se = FALSE)
 ```
 
-.content-box-yellow[There is a positive relationship between temperature and electricity consumption.]
+<content-box class="content-box-yellow">There is a positive relationship between temperature and electricity consumption.<content-box>
 
 ### b) fit regression
 >Fit a linear regression model to the previously visualised relationship and display the results. Why is there a positive relationship? 
@@ -176,7 +191,7 @@ daily20 %>%
 (fit <- tslm(Demand ~ Temperature, data = daily20))
 ```
 
- Given the time of year, and the recorded temperature values, it is likely that electricity is being used for air conditioners. Since higher temperatures mean a higher demand for cooling, this leads to a positive relationship between temperature and electricity consumption.
+<content-box class="content-box-yellow">Given the time of year, and the recorded temperature values, it is likely that electricity is being used for air conditioners. Since higher temperatures mean a higher demand for cooling, this leads to a positive relationship between temperature and electricity consumption.</content-box>
 
 
 ### c) diagnostics
@@ -187,7 +202,7 @@ checkresiduals(fit)
 
 ```
 
-.content-box-yellow[Although the ACF tests are passed, there is a linear trend in the residuals. So the model looks inadequate and perhaps using an additional time trend predictor will improve the model.] 
+<content-box class="content-box-yellow">Although the ACF tests are passed, there is a linear trend in the residuals. So the model looks inadequate and perhaps using an additional time trend predictor will improve the model.</content-box>
 
 ### d) forecast 
 >Ignoring the modelling inadequacies for now, use the model to forecast the electricity demand that you would expect for the next day if the maximum temperature was $15^\circ$ and compare it with the forecast if the with maximum temperature was $35^\circ$. Do you believe these forecasts?
@@ -196,7 +211,7 @@ checkresiduals(fit)
 (fc <- forecast(fit, newdata=data.frame(Temperature=c(15,35))))
 ```
 
-.content-box-yellow[The prediction for $35^\circ$ looks reasonable, but the one for $15^\circ$ assumes the trend continues to decrease for temperature values lower than 20, which is unlikely. Heating will mean it will increase for lower temperatures.]
+<content-box class="content-box-yellow">The prediction for $35^\circ$ looks reasonable, but the one for $15^\circ$ assumes the trend continues to decrease for temperature values lower than 20, which is unlikely. Heating will mean it will increase for lower temperatures.<content-box>
 
 ### e) Is a linear model appropriate? 
 
@@ -210,7 +225,9 @@ elecdaily %>%
     geom_smooth(method = "lm", se = FALSE)
 ```
 
-.content-box-yellow[This shows the non-linear relationship clearly. Even limiting the data to above 20, there is a non-linear relationship between demand and temperature. The model is inadequate.]
+<content-box class="content-box-yellow">
+This shows the non-linear relationship clearly. Even limiting the data to above 20, there is a non-linear relationship between demand and temperature. The model is inadequate.
+</content-box>
 
 ## linear trend regressions
 Data set `mens400` contains the winning times (in seconds) for the men's 400 meters final in each Olympic Games from 1896 to 2016.
@@ -226,7 +243,9 @@ qplot(time(mens400),mens400) +
        title = "Mens 400 metres Olympics")
 ```
 
-.content-box-yellow[After an initial outlier, the plot shows linear relationship between **Year** and **time** for years in range from 1900 to about 1976. Data for years from 1980 show a smaller trend.]
+<content-box class="content-box-yellow">
+After an initial outlier, the plot shows linear relationship between **Year** and **time** for years in range from 1900 to about 1976. Data for years from 1980 show a smaller trend.
+</content-box>
 
 ### b) Fit linear regression
 >Fit a regression line to the data. Obviously the winning times have been decreasing, but at what *average* rate per year?
@@ -241,7 +260,7 @@ qplot(time(mens400), mens400) +
   geom_smooth(method='lm')
 ```
 
-.content-box-yellow[The average change per year is the value from the time trend coefficient estimate in second per year.]
+<content-box class="content-box-yellow">The average change per year is the value from the time trend coefficient estimate in second per year.</content-box>
 
 ### c) Diagnostics
 >Plot the residuals against the year. What does this indicate about the suitability of the fitted line?
@@ -251,7 +270,7 @@ qplot(time(mens400), residuals(fit)) +
   geom_hline(yintercept=0, col='grey')
 ```
 
-.content-box-yellow[There is an outlier at year 1896 and a change in trend at around 1980 (shown by the positive residuals after that time. So the linear model is not a good choice.]
+<content-box class="content-box-yellow">There is an outlier at year 1896 and a change in trend at around 1980 (shown by the positive residuals after that time. So the linear model is not a good choice.</content-box>
 
 ### d) forecast using new data
 >Ignoring the modelling inadequacies for now,predict the winning time for the men's 400 meters final in the 2020 Olympics. Give a prediction interval for your forecasts. What assumptions have you made in these calculations?
@@ -262,18 +281,18 @@ qplot(time(mens400), residuals(fit)) +
 forecast(fit, newdata=data.frame(timetrend=2020))
 ```
 
-.content-box-yellow[The above calculations are made with the assumption that the men's 400 metres Olympics final results change on average with constant rate. This is unlikely, especially given the obvious change in slope in the data. The actual winning time is likely to be much higher than what has been forecast.]
+<content-box class="content-box-yellow">The above calculations are made with the assumption that the men's 400 metres Olympics final results change on average with constant rate. This is unlikely, especially given the obvious change in slope in the data. The actual winning time is likely to be much higher than what has been forecast.</content-box>
 
 ## Beer demand
 
 ### a) Visualise
 >Type `easter(ausbeer)` and interpret what you see.
 
-```{r beer, exercise=TRUE}
+```{r beer, exercise=TRUE, class.source="scroll-50"}
 easter(ausbeer)
 ```
 
-.content-box-yellow[This gives the proportion of Easter in each quarter. Easter is defined as including Good Friday, Easter Saturday, and Easter Sunday.]
+<content-box class="content-box-yellow">This gives the proportion of Easter in each quarter. Easter is defined as including Good Friday, Easter Saturday, and Easter Sunday.</content-box>
 
 ## Theoretical question
 An elasticity coefficient is the ratio of the percentage change in the forecast variable ($y$) to the percentage change in the predictor variable ($x$). Mathematically, the elasticity is defined as $(dy/dx)\times(x/y)$. Consider the log-log model,
@@ -307,13 +326,13 @@ autoplot(fancy) +
   xlab("Year") + ylab("Sales")
 ```
 
-.content-box-yellow[
+<content-box class="content-box-yellow">
 Features of the data:
 
 * Seasonal data -- similar scaled pattern repeats every year
 * A spike every March (except for year 1987) is the influence of the surfing festival
 * The size of the pattern increases proportionally to the level of sales
-]
+</content-box>
 
 ### b) Transform
 
@@ -326,7 +345,7 @@ Features of the data:
 autoplot(log(fancy)) + ylab("log Sales")
 ```
 
-.content-box-yellow[After taking logs, the trend looks more linear and the seasonal variation is roughly constant.]
+<content-box class="content-box-yellow">After taking logs, the trend looks more linear and the seasonal variation is roughly constant.</content-box>
 
 ### c) fit linear regression
 
@@ -354,8 +373,7 @@ autoplot(residuals(fit))
 
 qplot(fitted(fit), residuals(fit))
 ```
-
-.content-box-yellow[The residuals may be serially correlated (more robust testing is required). They reveal non-linearity in the trend.  There are no problems apparent in graph against fitted values.]
+<content-box class="content-box-yellow">The residuals may be serially correlated (more robust testing is required). They reveal non-linearity in the trend.  There are no problems apparent in graph against fitted values.</content-box>
 
 ### e) Boxplot residuals
 
@@ -366,7 +384,7 @@ month <- factor(cycle(residuals(fit)), labels=month.abb)
 ggplot() + geom_boxplot(aes(x=month, y=residuals(fit), group=month))
 ```
 
-.content-box-yellow[The boxplot does not reveal any problems except heteroscedasticity (unstable variance)]
+<content-box class="content-box-yellow">The boxplot does not reveal any problems except heteroscedasticity (unstable variance)</content-box>
 
 ### f) coefficient estimate inference. 
 
@@ -375,21 +393,23 @@ ggplot() + geom_boxplot(aes(x=month, y=residuals(fit), group=month))
 ```{r coeffs,exercise=TRUE, exercise.setup="fitit"}
 coefficients(fit)
 ```
-.content-box-yellow[
+<content-box class="content-box-yellow">
 * `(Intercept)` is not interpretable.
 * `trend` coefficient shows that with every year logarithm of sales increases on average by 0.02.
 * `season2` coefficient shows that in February logarithm of sales increases compare to January on average by 0.25.
 * `season12` coefficient shows that in December logarithm of sales increases compare to January on average by 1.96.
 * `festivalTRUE` coefficient shows that with surfing festival logarithm of sales increases compare to months without the festival on average by 0.5.
-]
+</content-box>
+
 ### g) regression serial correlation
-What does the Breusch-Godfrey test tell you about your model?
+
+>What does the Breusch-Godfrey test tell you about your model?
 
 ```{r BG, exercise=TRUE, exercise.setup="fitit"}
 checkresiduals(fit,plot = FALSE)
 ```
 
-The serial correlation in the residuals is significant.
+<content-box class="content-box-yellow"> Assumption the model is valid, the serial correlation in the residuals is significant.</content-box>
 
 ### h) Forecast
 
@@ -411,4 +431,4 @@ fit %>%
 
 ### j) How could you improve these predictions by modifying the model?
 
-.content-box-yellow[The model can be improved by taking into account non-linearity of the trend.  Perhaps by including a squared time trend.]
+<content-box class="content-box-yellow">The model can be improved by taking into account non-linearity of the trend.  Perhaps by including a squared time trend.</content-box>
