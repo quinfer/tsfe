@@ -63,7 +63,21 @@ If you would like to access the raw RMarkdown code which created these tutorials
 
 ## Project Report
 This package also includes a RMarkdown template for use in the project report.
-Go to File>New>R Markdown... and choose from `From Template` then `project-report`.
+Go to File>New>R Markdown... and choose from `From Template` then `project-report`.  There are four sections in the report
+
+* Introduction and literature review
+* Data and methodology
+* Results 
+* Discussion
+
+The marks are allocated equally to each section.
+
+### Indicative marking scheme
+
+```{r}
+htmltools::includeHTML("rubric.html")
+```
+
 
 ## Datasets
 This package also includes dataset used in the course
