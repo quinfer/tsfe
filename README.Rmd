@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -74,8 +75,11 @@ The marks are allocated equally to each section.
 
 ### Indicative marking scheme
 
-```{r}
-htmltools::includeHTML("rubric.html")
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+readRDS("~/Dropbox/Teaching/TSFE/ts_stats/rubric.rds")-> out
+out %>% knitr::kable() %>% kableExtra::kable_paper()
+
 ```
 
 
