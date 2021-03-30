@@ -3,7 +3,8 @@ title: "linear regression uncertainty and prediction"
 output:
   learnr::tutorial:
     css: ['css/mycssblend.css']
-description: "Learn how to sensibly build, interpret and predict from simple linear regression models with the emphasise on the uncertainty"
+description: "Learn how to sensibly build, interpret and predict from simple linear regression models with the emphasis on the uncertainty"
+code_download: true
 runtime: shiny_prerendered
 
 ---
@@ -25,7 +26,7 @@ library(car)
 
 ## Before you begin
 
-Make sure the following packages can be loaded
+If you are running this tutorial locally, make sure the following packages can be loaded
 
 ```
 library(learnr)

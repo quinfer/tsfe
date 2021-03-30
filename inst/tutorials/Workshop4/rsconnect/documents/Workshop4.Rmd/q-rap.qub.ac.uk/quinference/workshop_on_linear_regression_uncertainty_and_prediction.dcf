@@ -5,8 +5,8 @@ account: quinference
 server: q-rap.qub.ac.uk
 hostUrl: https://q-rap.qub.ac.uk/__api__
 appId: 33
-bundleId: 97
-url: https://q-rap.qub.ac.uk/content/33/
-when: 1617097174.97989
+bundleId: 99
+url: https://q-rap.qub.ac.uk/w4/
+when: 1617112465.34939
 asMultiple: FALSE
 asStatic: FALSE
