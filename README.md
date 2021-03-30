@@ -3,9 +3,7 @@
 
 # tsfe
 
-<!-- badges: start -->
-
-<!-- badges: end -->
+<img src="inst/figures/ggplot2.png">
 
 This package contains templates for reports, and functions and workshops
 using in [*Time series financial
