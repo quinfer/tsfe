@@ -1,5 +1,5 @@
 ---
-title: "linear regression uncertainty"
+title: "linear regression uncertainty and prediction"
 output:
   learnr::tutorial:
     css: ['css/mycssblend.css']
