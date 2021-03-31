@@ -3,12 +3,12 @@
 
 # tsfe
 
-<img src="inst/figures/ggplot2.png">
+<img src="inst/figures/rw_hex.png" width="20%">
 
 This package contains templates for reports, and functions and workshops
 using in [*Time series financial
 econometrics*](https://canvas.qub.ac.uk/courses/11736) taught by [Barry
-Quinn](https://quinference.com/) inb Queen’s Management School.
+Quinn](https://quinference.com/) at Queen’s Management School.
 
 ## Installation
 
