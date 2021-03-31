@@ -15,8 +15,7 @@ library(tidyverse)
 library(tidyquant)
 library(tsfe)
 library(fpp2)
-library(bookdown) ## this needs to be installed to knit this document to a pdf for submission.
-## Total word count should be 1500 words excluding references
+library(bookdown) ## this needs to be installed to knit this document to a pdf for submission
 ## When you knitr the document the references should automatically populate at the end of the document
 ```
 
@@ -25,8 +24,10 @@ library(bookdown) ## this needs to be installed to knit this document to a pdf f
 1. Update the author and title fields in the above YAML section.
 2. Edit the `refs.bib` file to include any extra references you have. 
 3. Click `Knit` to see what the output will look like
-  * Knit to pdf requres an installation of a latex engine for example [`tinytex`](https://yihui.org/tinytex/)
+  * Knit to pdf requires an installation of a latex engine for example [`tinytex`](https://yihui.org/tinytex/)
 4 . Save the .Rmd file using the naming convention specified in class
+
+> **Tip**: It is good practice to HIT and KNIT every time you do a new piece of code or text chunk
 
 ### To get you started with R markdown
 
