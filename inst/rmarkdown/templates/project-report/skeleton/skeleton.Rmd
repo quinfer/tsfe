@@ -2,11 +2,10 @@
 title: "Untitled"
 author: "Student name(s)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-bibliograph: ["refs.bib"]
+bibliography: refs.bib
 output:
    bookdown::pdf_document2:
      toc: true
-
 ---
 
 ```{r setup, include=FALSE}
@@ -44,8 +43,12 @@ It should be sufficiently non-technical that an intelligent person who is unfami
 Use high-quality literature to illustrate the pros and cons of the argument. 
 
 Some examples of how to use the `.bib` to add references
-* In line `@Jensen2021` renders as Jensen (2021)
-* And `[@Jensen]` renders as (Jensen 2021)
+
+* In line `@Johannes.2014` renders as @Johannes.2014
+
+* And `[@Timmermann.2008]` renders as [@Timmermann.2008]
+
+If this is too complicated you can use manual copy and paste referencing.
 
 > **Tip**:A good introduction should provide answers to What are the aims and objective of the research?, Does it address a new problem or an old problem in a new way?  A good literature review critically assesses the research to date.
 
