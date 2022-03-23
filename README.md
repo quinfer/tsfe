@@ -5,6 +5,8 @@
 
 <img src="inst/figures/rw_hex.png" width="20%">
 
+[![DOI](https://zenodo.org/badge/342634123.svg)](https://zenodo.org/badge/latestdoi/342634123)
+
 This package contains templates for reports, and functions and workshops
 using in [*Time series financial
 econometrics*](https://canvas.qub.ac.uk/courses/11736) taught by [Barry
