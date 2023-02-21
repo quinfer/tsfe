@@ -1,0 +1,125 @@
+---
+title: "Hello, Quarto-analytics!"
+author: "Barry Quinn"
+format: html
+editor: visual
+bibliography: references.bib
+execute:
+  echo: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) 
+library(tidyquant)
+library(tsfe)
+library(fpp2)
+library(gt)
+```
+
+## Introduction and critique
+
+::: callout-tip
+It should be sufficiently non-technical that an intelligent person who is unfamiliar with the field could grasp what the study is about. The introduction should include a summary of the relevant articles in the field. At a minimum, the papers provided should be summarized in the student's own words. The end of the introduction should introduce what is going to happen in the rest of the paper.
+
+Use high-quality literature to illustrate the pros and cons of the argument.
+
+Some examples of how to use the `.bib` to add references
+
+-   In line `@Johannes.2014` renders as @Johannes.2014
+
+-   And `[@Timmermann.2008]` renders as [@Timmermann.2008]
+
+If this is too complicated you can use manual copy and paste referencing.
+
+**Tip:** A good introduction should provide answers to What are the aims and objective of the research?, Does it address a new problem or an old problem in a new way? A good literature review critically assesses the research to date.
+:::
+
+## Data and methods
+
+::: callout-tip
+A detailed description of the data to include, the source, the format, the data features and any limitations, which are relevant to the analysis. Where appropriate use of professional data visualisations. The model and estimation techniques being used should be outlined, using equations where appropriate and with a critique of their limitations, weaknesses and potential improvements.
+
+**Tip**: Use clear and concise graphical representation as per the principles of [Edward Tufte](https://thedoublethink.com/tuftes-principles-for-visualizing-quantitative-information/). Do not mechanically replicate the course material! This is your chance to express your understanding of the techniques, their applications and their limitations.
+:::
+
+## Results
+
+::: callout-tip
+Results should be displayed professionally in tabulated or graph form, with emphasis on any interesting features. Inferences should be related to the original aims of the project and if the results are what was expected based on prior academic research.
+
+**Tip**: The bland reporting of results without proper discussion and critique will score low in this section! Mention each table/figure explicitly in the text; poor referencing will also be penalised!. Results should be tabulated in a professional manner in line with a high-quality journal output. Copy and paste shortcuts from statistical software is not professional and will be penalised.
+:::
+
+## Discussion
+
+::: callout-tip
+In conclusion you should restate your original aim and outline the most important results, as well as the weaknesses in the study. It is also important to state some directions for future research in the area.
+
+Summarise and state your critical assessment using any evidence you have provided in the previous sections.
+
+**Tip**: The bland reporting of results without proper discussion and critique will score low in this section! Mention each table/figure explicitly in the text; poor referencing will also be penalised!. Results should be tabulated in a professional manner in line with a high-quality journal output. Copy and paste shortcuts from statistical software is not professional and will be penalised.
+:::
+
+## Reference
+
+*This is where the cited references should appear when you render the document to a html*
+
+# Some examples of interactive content
+
+## Data
+
+Use the `tsfe::ftse` data for this example
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(tsfe)
+library(data.table)
+```
+
+```{r}
+#| label: glimpse-data
+
+glimpse(ftse350)
+```
+
+```{r}
+#| label: interactive-glimpse-data
+
+ftse350 %>% data.table()
+```
+
+## Interactive time plot
+
+@fig-plot-ftse is a interactive time plot of the FTSE 350 monthly price index.
+
+```{r}
+#| label: fig-plot-ftse
+#| fig-cap: FTSE 350 Price Index
+#| fig-width: 5
+#| fig-asp: 0.618
+library(plotly)
+ftse_m_ts %>%
+  autoplot() %>%
+  ggplotly()
+
+```
+
+## FTSE 350 constituents {.smaller}
+
+@tbl-ftse-constituents shows the first 10 stocks from the ftse350 index data.
+
+```{r}
+#| label: tbl-ftse-constituents
+#| tbl-cap: First 3 stocks from the dataset by alphabetical order and the market prices.
+#| code-fold: true
+names_of_ftse_stocks<-unique(ftse350$Name)
+table(ftse350$variable)
+ftse350 |>
+  filter(Name %in% names_of_ftse_stocks[1:3]) |>
+  filter(variable=="Price") |>
+  data.table()
+```
