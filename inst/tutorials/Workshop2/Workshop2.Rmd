@@ -50,6 +50,9 @@ port_ret_vw <-port_ret_vw %>%
 
 port_ret_both<- port_ret_vw %>% rename(vw_ret=ret) %>%
   left_join(port_ret_ew %>% rename(ew_ret=ret),by="date")
+
+ni_hsales_ts<-ts(ni_hsales$`Total Verified Sales`,start = c(2005,1),frequency = 4)
+usuk_rate_ts<-ts(usuk_rate$price)
 ```
 
 
@@ -299,7 +302,53 @@ port_ret_both %>%
   geom_line()
 ```
 
-## Topic 4 Test your knowledge
+## Topic 4 patterns in correlation
+
+### Learning outcomes
+
+We have introduced the following graphics functions:
+
+  - `gglagplot`
+  - `ggAcf`
+
+Explore the following time series from the `tsfe` package using these functions. Can you spot any seasonality, cyclicity and trend? What do you learn about the series?
+
+  - `ni_hsales_ts`
+  - `usuk_rate_ts`
+  - `ftse_m_ts`
+
+### Autocorrelation testing
+
+Firstly create time series objects of the data from `tsfe` package. Note that `ftse_m_ts` is already in the package data.
+
+```{r ts object creation, echo=TRUE, eval=TRUE}
+ni_hsales_ts<-ts(ni_hsales$`Total Verified Sales`,start = c(2005,1),frequency = 4)
+usuk_rate_ts<-ts(usuk_rate$price)
+```
+
+Plot and visually compare the above time series objects.  Then use some visual aids to identify autocorrelation, What do you find? Hint: remember the autocorrelation plots from the lecture
+
+```{r autcorrelation, exercise=TRUE}
+
+
+```
+
+
+```{r autcorrelation-solution}
+autoplot(ni_hsales_ts)
+autoplot(usuk_rate_ts)
+autoplot(ftse_m_ts)
+gglagplot(ni_hsales_ts)
+gglagplot(usuk_rate_ts)
+gglagplot(ftse_m_ts)
+ggAcf(ni_hsales_ts)
+ggAcf(usuk_rate_ts)
+ggAcf(ftse_m_ts)
+
+```
+
+
+## Topic 5 Test your knowledge
 
 ```{r logicals, echo = FALSE}
 question("Explain when it is **not** appropriate to use the above approximation for portfolio returns",
