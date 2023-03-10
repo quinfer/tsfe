@@ -1,9 +1,9 @@
 ---
-title: "Hello, Quarto-analytics!"
-author: "Barry Quinn"
+title: "FIN7028 template"
+author: ""
 format: html
 editor: visual
-bibliography: references.bib
+bibliography: ref.bib
 execute:
   echo: true
 ---
