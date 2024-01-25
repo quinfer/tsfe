@@ -12,7 +12,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
 Depends: 
     R (>= 2.10)
-Suggests: learnr,tibble,fpp2
+Suggests: 
+    learnr,
+    tibble,
+    fpp2,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
