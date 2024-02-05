@@ -1,0 +1,143 @@
+---
+title: "Reproducible critical essay"
+author: "Barry"
+editor: visual
+---
+
+### Project Submission and Protocol
+
+Students are required to complete their projects using a Quarto template. Each student will be provided with this template via Q-RaP Posit Cloud. To ensure compliance with academic integrity standards and avoid misuse of GenAI + LLMs, students must commit their work regularly using the git panel in Posit IDE.
+
+#### Key Requirements:
+
+-   Projects must exhibit a professional level of statistical output, akin to high-quality academic papers or industry reports.
+-   Direct copy-pasting of statistical output is prohibited.
+-   Ensure all tables and figures are visible upon rendering the document to HTML.
+-   A record of a substantial amount of git committments in Posit Cloud histories.
+-   Preliminary positive feedback does not guarantee high final submission marks.
+-   Late submissions incur a 5% deduction per minute past the deadline.
+-   Projects failing to meet these criteria will require resubmission, potentially incurring late penalties.
+
+### Utilising GenAI and LLMs
+
+#### Introduction to GenAI+LLMs
+
+Generative AI (GenAI) and Large Language Models (LLMs) offer innovative ways to enhance financial research and analytics. These technologies can assist in data analysis, code generation, insights formulation, and report drafting.
+
+#### Instructions for Free GenAI Tools
+
+##### Claude.ai
+
+1.  **Sign Up:** Register at [claude.ai](https://claude.ai).
+2.  **Usage:** Input queries related to your project for insights or assistance.
+3.  **Application:** Implement responses to enhance analysis or report sections.
+
+##### Hugging Face Chat
+
+1.  **Access:** Navigate to the [Hugging Face Chat](https://huggingface.co/chat/) and select the free model.
+2.  **Engagement:** Input your financial research queries or coding inquiries.
+3.  **Integration:** Utilise the insights or code suggestions in your project.
+
+::: callout-tip
+I have created a free Econometrics Learner chat bot for this course on the Hugging Face platform which can be found here <https://hf.co/chat/assistant/65bfbc135560c1a5c0c9d23b>
+:::
+
+##### ChatGPT
+
+1.  **Registration:** Sign up for a free ChatGPT account.
+2.  **Operation:** Seek assistance with coding, analysis, or drafting report sections.
+3.  **Adaptation:** Critically evaluate and incorporate ChatGPT's outputs into your project.
+
+### Reflective Essay
+
+#### Assignment Details
+
+-   **Objective:** Write a 500-word essay critiquing the use of GenAI+LLMs in financial research and analytics, focusing on their benefits, limitations, and ethical considerations.
+-   **Requirements:** The essay must be original, reflecting your personal experiences and insights.
+-   **Submission:** Include this essay with your project report in the appendix.
+
+### Project Data and Topics
+
+Data for the project is provided via the `tsfe` R package. Topics range from index return predictability to the predictability of the Queen's Student Managed Fund returns, with specific research questions outlined for each.
+
+#### Literature and Originality
+
+A solid empirical project is grounded in previous research. Students must engage with high-quality academic and industry sources, with a literature review incorporating at least three high-quality references. Originality is paramount, and submissions will be vetted for plagiarism using a bespoke algorithm to help students avoid the misuse of GenAI+LLMs.
+
+#### Plagiarism and Penalties
+
+Plagiarism will not be tolerated, and suspected cases may lead to oral examination or disciplinary action. The Student Handbook outlines penalties for late submissions and plagiarism.
+
+### Marking Scheme and Tips
+
+The indicative marking scheme covers aspects from introduction and literature review to originality and methodological application. A good project will compare several econometric models, include out-of-sample testing, and critically analyse results within the context of existing literature.
+
+### Indicative Marking Scheme
+
+The project and reflective essay will be evaluated based on the following criteria, integrating the description with the value directly into the headings, alongside the percentage each section contributes to the overall mark:
+
+| Criterion & Percentage of Overall Mark           | Expectation Not Met (5 points)                         | Approaching Expectation (15 points)                                 | Meets Expectation (20 points)                       | Exceeds Expectation (25 points)                                              |
+|--------------------------------------------------|--------------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------|
+| **Introduction and Literature (20%)**            | Needs significant improvement; lacks critical review.  | Sets out the problem; requires more critical commentary.            | Adequate introduction; good literature review.      | Excellent introduction and critical literature review.                       |
+| **Data and Methods (20%)**                       | Poor model choice with minimal critique.               | Appropriate techniques; limited critique.                           | Good model construction; some method critique.      | Excellent model construction and critical methodological commentary.         |
+| **Results (20%)**                                | Undefined results; poor use of tables/graphs.          | Limited inference; poor empirical relation.                         | Appropriate use of visuals; good inferences.        | Excellent data presentation; insightful empirical critique.                  |
+| **Discussion (20%)**                             | Incomplete inferences.                                 | Some inference; lacks depth.                                        | Good critical inferences; some literature relation. | Excellent critique; thorough literature integration.                         |
+| **Originality and Project Innovation (10%)**     | Lacks methodological application; basic understanding. | Good module content understanding; some originality.                | Evidence of originality and critical judgement.     | Comprehensive understanding; methodological rigour; high critical judgement. |
+| **Reflective Essay Analysis and Critique (10%)** | Minimal critique of GenAI+LLMs; lacks depth.           | Basic understanding of ethical considerations; limited originality. | Insightful analysis; good critique of GenAI+LLMs.   | Deep and original critique of ethical considerations and GenAI+LLMs use.     |
+
+For the **Reflective Essay Analysis and Critique** category, the points are distributed as follows to reflect its specific evaluation criteria, aligning with its 10% contribution to the overall mark:
+
+| Expectation Not Met (2 points)               | Approaching Expectation (8 points)                                  | Meets Expectation (13 points)                     | Exceeds Expectation (20 points)                                          |
+|----------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------|--------------------------------------------------------------------------|
+| Minimal critique of GenAI+LLMs; lacks depth. | Basic understanding of ethical considerations; limited originality. | Insightful analysis; good critique of GenAI+LLMs. | Deep and original critique of ethical considerations and GenAI+LLMs use. |
+
+### Reflective Essay Marking Scheme
+
+The reflective essay's depth of critique on the use of GenAI+LLMs, ethical considerations, originality, and insightful analysis will be critically assessed, contributing 10% to the overall project mark.
+
+#### Datasets
+
+The `tsfe` R package provides the datasets required for your analysis, available for course-related projects.
+
+### Reflective Essay Marking Scheme
+
+The reflective essay will be assessed based on its depth of critique regarding the use of GenAI+LLMs, ethical considerations, originality, and the ability to provide insightful analysis.
+
+#### Datasets
+
+The `tsfe` R package provides the datasets required for your analysis, available for course-related projects.
+
+Certainly! Below, I provide more detailed examples of research questions that students can explore for each project data type available through the `tsfe` R package. These questions aim to guide students in framing their analysis and utilizing the data effectively.
+
+## Example Research Questions for Project Data Types
+
+### 1. Index Return Predictability
+
+Using the `tsfe::indice` dataset, students can explore various aspects of financial markets. Here are some example research questions:
+
+-   **Is there evidence of long-term predictability in stock market index returns?** Analyse historical index returns to identify patterns or trends that may suggest predictability over different time horizons.
+-   **How do macroeconomic variables influence index returns?** Investigate the relationship between key macroeconomic indicators (e.g., inflation rates, interest rates, GDP growth) and stock market index returns.
+-   **Can machine learning models improve the predictability of stock market indices compared to traditional time-series models?** Compare the forecasting accuracy of machine learning models (such as Random Forests, Neural Networks) against ARIMA or GARCH models.
+
+### 2. The Predictability of the Queen's Student Managed Fund Returns
+
+For the `tsfe::QSMF_all` dataset, students could examine the performance and characteristics of a student-managed fund. Potential research questions include:
+
+-   **What factors contribute to the performance of the Queen's Student Managed Fund?** Explore whether specific sectors, asset allocations, or market conditions have significantly impacted the fund's returns.
+-   **Is there a difference in predictability between individual stock holdings and the overall fund returns?** Analyse the predictability of returns for individual stocks within the portfolio versus the aggregated fund performance.
+-   **How does the risk-return profile of the Queen's Student Managed Fund compare to market benchmarks?** Evaluate the fund's performance in terms of risk-adjusted returns, comparing it to relevant benchmarks.
+
+### 3. General Financial Time Series Analysis
+
+For datasets available in the `tsfe` package that cover a range of financial time series, students might consider questions like:
+
+-   **What is the impact of financial news sentiment on asset prices?** Assess how changes in the sentiment of financial news can affect the prices of stocks, bonds, or other assets.
+-   **Do high-frequency trading strategies destabilise financial markets?** Utilise high-frequency data to examine the impact of rapid trading on market volatility, liquidity, or efficiency.
+-   **Can cryptocurrency returns be predicted by traditional financial indicators?** Explore the relationship between cryptocurrencies and traditional financial market indicators to assess if standard analysis tools can be applied to this newer asset class.
+
+### Guidance for Formulating Research Questions
+
+-   **Relevance:** Ensure the question addresses a gap in existing research or practical knowledge.
+-   **Specificity:** Clearly define the variables, datasets, and time frame you plan to study.
+-   **Feasibility:** Consider the data and methods available to you when choosing your question.
+-   **Originality:** Aim to provide new insights or challenge existing assumptions within the financial analysis domain.

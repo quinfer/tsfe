@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Barry">
+
+<title>Reproducible critical essay</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="project_files/libs/clipboard/clipboard.min.js"></script>
+<script src="project_files/libs/quarto-html/quarto.js"></script>
+<script src="project_files/libs/quarto-html/popper.min.js"></script>
+<script src="project_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="project_files/libs/quarto-html/anchor.min.js"></script>
+<link href="project_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="project_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="project_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="project_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reproducible critical essay</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Barry </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="project-submission-and-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="project-submission-and-protocol">Project Submission and Protocol</h3>
+<p>Students are required to complete their projects using a Quarto template. Each student will be provided with this template via Q-RaP Posit Cloud. To ensure compliance with academic integrity standards and avoid misuse of GenAI + LLMs, students must commit their work regularly using the git panel in Posit IDE.</p>
+<section id="key-requirements" class="level4">
+<h4 class="anchored" data-anchor-id="key-requirements">Key Requirements:</h4>
+<ul>
+<li>Projects must exhibit a professional level of statistical output, akin to high-quality academic papers or industry reports.</li>
+<li>Direct copy-pasting of statistical output is prohibited.</li>
+<li>Ensure all tables and figures are visible upon rendering the document to HTML.</li>
+<li>A record of a substantial amount of git committments in Posit Cloud histories.</li>
+<li>Preliminary positive feedback does not guarantee high final submission marks.</li>
+<li>Late submissions incur a 5% deduction per minute past the deadline.</li>
+<li>Projects failing to meet these criteria will require resubmission, potentially incurring late penalties.</li>
+</ul>
+</section>
+</section>
+<section id="utilising-genai-and-llms" class="level3">
+<h3 class="anchored" data-anchor-id="utilising-genai-and-llms">Utilising GenAI and LLMs</h3>
+<section id="introduction-to-genaillms" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-to-genaillms">Introduction to GenAI+LLMs</h4>
+<p>Generative AI (GenAI) and Large Language Models (LLMs) offer innovative ways to enhance financial research and analytics. These technologies can assist in data analysis, code generation, insights formulation, and report drafting.</p>
+</section>
+<section id="instructions-for-free-genai-tools" class="level4">
+<h4 class="anchored" data-anchor-id="instructions-for-free-genai-tools">Instructions for Free GenAI Tools</h4>
+<section id="claude.ai" class="level5">
+<h5 class="anchored" data-anchor-id="claude.ai">Claude.ai</h5>
+<ol type="1">
+<li><strong>Sign Up:</strong> Register at <a href="https://claude.ai">claude.ai</a>.</li>
+<li><strong>Usage:</strong> Input queries related to your project for insights or assistance.</li>
+<li><strong>Application:</strong> Implement responses to enhance analysis or report sections.</li>
+</ol>
+</section>
+<section id="hugging-face-chat" class="level5">
+<h5 class="anchored" data-anchor-id="hugging-face-chat">Hugging Face Chat</h5>
+<ol type="1">
+<li><strong>Access:</strong> Navigate to the <a href="https://huggingface.co/chat/">Hugging Face Chat</a> and select the free model.</li>
+<li><strong>Engagement:</strong> Input your financial research queries or coding inquiries.</li>
+<li><strong>Integration:</strong> Utilise the insights or code suggestions in your project.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I have created a free Econometrics Learner chat bot for this course on the Hugging Face platform which can be found here <a href="https://hf.co/chat/assistant/65bfbc135560c1a5c0c9d23b" class="uri">https://hf.co/chat/assistant/65bfbc135560c1a5c0c9d23b</a></p>
+</div>
+</div>
+</section>
+<section id="chatgpt" class="level5">
+<h5 class="anchored" data-anchor-id="chatgpt">ChatGPT</h5>
+<ol type="1">
+<li><strong>Registration:</strong> Sign up for a free ChatGPT account.</li>
+<li><strong>Operation:</strong> Seek assistance with coding, analysis, or drafting report sections.</li>
+<li><strong>Adaptation:</strong> Critically evaluate and incorporate ChatGPT’s outputs into your project.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="reflective-essay" class="level3">
+<h3 class="anchored" data-anchor-id="reflective-essay">Reflective Essay</h3>
+<section id="assignment-details" class="level4">
+<h4 class="anchored" data-anchor-id="assignment-details">Assignment Details</h4>
+<ul>
+<li><strong>Objective:</strong> Write a 500-word essay critiquing the use of GenAI+LLMs in financial research and analytics, focusing on their benefits, limitations, and ethical considerations.</li>
+<li><strong>Requirements:</strong> The essay must be original, reflecting your personal experiences and insights.</li>
+<li><strong>Submission:</strong> Include this essay with your project report in the appendix.</li>
+</ul>
+</section>
+</section>
+<section id="project-data-and-topics" class="level3">
+<h3 class="anchored" data-anchor-id="project-data-and-topics">Project Data and Topics</h3>
+<p>Data for the project is provided via the <code>tsfe</code> R package. Topics range from index return predictability to the predictability of the Queen’s Student Managed Fund returns, with specific research questions outlined for each.</p>
+<section id="literature-and-originality" class="level4">
+<h4 class="anchored" data-anchor-id="literature-and-originality">Literature and Originality</h4>
+<p>A solid empirical project is grounded in previous research. Students must engage with high-quality academic and industry sources, with a literature review incorporating at least three high-quality references. Originality is paramount, and submissions will be vetted for plagiarism using a bespoke algorithm to help students avoid the misuse of GenAI+LLMs.</p>
+</section>
+<section id="plagiarism-and-penalties" class="level4">
+<h4 class="anchored" data-anchor-id="plagiarism-and-penalties">Plagiarism and Penalties</h4>
+<p>Plagiarism will not be tolerated, and suspected cases may lead to oral examination or disciplinary action. The Student Handbook outlines penalties for late submissions and plagiarism.</p>
+</section>
+</section>
+<section id="marking-scheme-and-tips" class="level3">
+<h3 class="anchored" data-anchor-id="marking-scheme-and-tips">Marking Scheme and Tips</h3>
+<p>The indicative marking scheme covers aspects from introduction and literature review to originality and methodological application. A good project will compare several econometric models, include out-of-sample testing, and critically analyse results within the context of existing literature.</p>
+</section>
+<section id="indicative-marking-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="indicative-marking-scheme">Indicative Marking Scheme</h3>
+<p>The project and reflective essay will be evaluated based on the following criteria, integrating the description with the value directly into the headings, alongside the percentage each section contributes to the overall mark:</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 18%">
+<col style="width: 22%">
+<col style="width: 17%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterion &amp; Percentage of Overall Mark</th>
+<th>Expectation Not Met (5 points)</th>
+<th>Approaching Expectation (15 points)</th>
+<th>Meets Expectation (20 points)</th>
+<th>Exceeds Expectation (25 points)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Introduction and Literature (20%)</strong></td>
+<td>Needs significant improvement; lacks critical review.</td>
+<td>Sets out the problem; requires more critical commentary.</td>
+<td>Adequate introduction; good literature review.</td>
+<td>Excellent introduction and critical literature review.</td>
+</tr>
+<tr class="even">
+<td><strong>Data and Methods (20%)</strong></td>
+<td>Poor model choice with minimal critique.</td>
+<td>Appropriate techniques; limited critique.</td>
+<td>Good model construction; some method critique.</td>
+<td>Excellent model construction and critical methodological commentary.</td>
+</tr>
+<tr class="odd">
+<td><strong>Results (20%)</strong></td>
+<td>Undefined results; poor use of tables/graphs.</td>
+<td>Limited inference; poor empirical relation.</td>
+<td>Appropriate use of visuals; good inferences.</td>
+<td>Excellent data presentation; insightful empirical critique.</td>
+</tr>
+<tr class="even">
+<td><strong>Discussion (20%)</strong></td>
+<td>Incomplete inferences.</td>
+<td>Some inference; lacks depth.</td>
+<td>Good critical inferences; some literature relation.</td>
+<td>Excellent critique; thorough literature integration.</td>
+</tr>
+<tr class="odd">
+<td><strong>Originality and Project Innovation (10%)</strong></td>
+<td>Lacks methodological application; basic understanding.</td>
+<td>Good module content understanding; some originality.</td>
+<td>Evidence of originality and critical judgement.</td>
+<td>Comprehensive understanding; methodological rigour; high critical judgement.</td>
+</tr>
+<tr class="even">
+<td><strong>Reflective Essay Analysis and Critique (10%)</strong></td>
+<td>Minimal critique of GenAI+LLMs; lacks depth.</td>
+<td>Basic understanding of ethical considerations; limited originality.</td>
+<td>Insightful analysis; good critique of GenAI+LLMs.</td>
+<td>Deep and original critique of ethical considerations and GenAI+LLMs use.</td>
+</tr>
+</tbody>
+</table>
+<p>For the <strong>Reflective Essay Analysis and Critique</strong> category, the points are distributed as follows to reflect its specific evaluation criteria, aligning with its 10% contribution to the overall mark:</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 28%">
+<col style="width: 21%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Expectation Not Met (2 points)</th>
+<th>Approaching Expectation (8 points)</th>
+<th>Meets Expectation (13 points)</th>
+<th>Exceeds Expectation (20 points)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Minimal critique of GenAI+LLMs; lacks depth.</td>
+<td>Basic understanding of ethical considerations; limited originality.</td>
+<td>Insightful analysis; good critique of GenAI+LLMs.</td>
+<td>Deep and original critique of ethical considerations and GenAI+LLMs use.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reflective-essay-marking-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="reflective-essay-marking-scheme">Reflective Essay Marking Scheme</h3>
+<p>The reflective essay’s depth of critique on the use of GenAI+LLMs, ethical considerations, originality, and insightful analysis will be critically assessed, contributing 10% to the overall project mark.</p>
+<section id="datasets" class="level4">
+<h4 class="anchored" data-anchor-id="datasets">Datasets</h4>
+<p>The <code>tsfe</code> R package provides the datasets required for your analysis, available for course-related projects.</p>
+</section>
+</section>
+<section id="reflective-essay-marking-scheme-1" class="level3">
+<h3 class="anchored" data-anchor-id="reflective-essay-marking-scheme-1">Reflective Essay Marking Scheme</h3>
+<p>The reflective essay will be assessed based on its depth of critique regarding the use of GenAI+LLMs, ethical considerations, originality, and the ability to provide insightful analysis.</p>
+<section id="datasets-1" class="level4">
+<h4 class="anchored" data-anchor-id="datasets-1">Datasets</h4>
+<p>The <code>tsfe</code> R package provides the datasets required for your analysis, available for course-related projects.</p>
+<p>Certainly! Below, I provide more detailed examples of research questions that students can explore for each project data type available through the <code>tsfe</code> R package. These questions aim to guide students in framing their analysis and utilizing the data effectively.</p>
+</section>
+</section>
+<section id="example-research-questions-for-project-data-types" class="level2">
+<h2 class="anchored" data-anchor-id="example-research-questions-for-project-data-types">Example Research Questions for Project Data Types</h2>
+<section id="index-return-predictability" class="level3">
+<h3 class="anchored" data-anchor-id="index-return-predictability">1. Index Return Predictability</h3>
+<p>Using the <code>tsfe::indice</code> dataset, students can explore various aspects of financial markets. Here are some example research questions:</p>
+<ul>
+<li><strong>Is there evidence of long-term predictability in stock market index returns?</strong> Analyse historical index returns to identify patterns or trends that may suggest predictability over different time horizons.</li>
+<li><strong>How do macroeconomic variables influence index returns?</strong> Investigate the relationship between key macroeconomic indicators (e.g., inflation rates, interest rates, GDP growth) and stock market index returns.</li>
+<li><strong>Can machine learning models improve the predictability of stock market indices compared to traditional time-series models?</strong> Compare the forecasting accuracy of machine learning models (such as Random Forests, Neural Networks) against ARIMA or GARCH models.</li>
+</ul>
+</section>
+<section id="the-predictability-of-the-queens-student-managed-fund-returns" class="level3">
+<h3 class="anchored" data-anchor-id="the-predictability-of-the-queens-student-managed-fund-returns">2. The Predictability of the Queen’s Student Managed Fund Returns</h3>
+<p>For the <code>tsfe::QSMF_all</code> dataset, students could examine the performance and characteristics of a student-managed fund. Potential research questions include:</p>
+<ul>
+<li><strong>What factors contribute to the performance of the Queen’s Student Managed Fund?</strong> Explore whether specific sectors, asset allocations, or market conditions have significantly impacted the fund’s returns.</li>
+<li><strong>Is there a difference in predictability between individual stock holdings and the overall fund returns?</strong> Analyse the predictability of returns for individual stocks within the portfolio versus the aggregated fund performance.</li>
+<li><strong>How does the risk-return profile of the Queen’s Student Managed Fund compare to market benchmarks?</strong> Evaluate the fund’s performance in terms of risk-adjusted returns, comparing it to relevant benchmarks.</li>
+</ul>
+</section>
+<section id="general-financial-time-series-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="general-financial-time-series-analysis">3. General Financial Time Series Analysis</h3>
+<p>For datasets available in the <code>tsfe</code> package that cover a range of financial time series, students might consider questions like:</p>
+<ul>
+<li><strong>What is the impact of financial news sentiment on asset prices?</strong> Assess how changes in the sentiment of financial news can affect the prices of stocks, bonds, or other assets.</li>
+<li><strong>Do high-frequency trading strategies destabilise financial markets?</strong> Utilise high-frequency data to examine the impact of rapid trading on market volatility, liquidity, or efficiency.</li>
+<li><strong>Can cryptocurrency returns be predicted by traditional financial indicators?</strong> Explore the relationship between cryptocurrencies and traditional financial market indicators to assess if standard analysis tools can be applied to this newer asset class.</li>
+</ul>
+</section>
+<section id="guidance-for-formulating-research-questions" class="level3">
+<h3 class="anchored" data-anchor-id="guidance-for-formulating-research-questions">Guidance for Formulating Research Questions</h3>
+<ul>
+<li><strong>Relevance:</strong> Ensure the question addresses a gap in existing research or practical knowledge.</li>
+<li><strong>Specificity:</strong> Clearly define the variables, datasets, and time frame you plan to study.</li>
+<li><strong>Feasibility:</strong> Consider the data and methods available to you when choosing your question.</li>
+<li><strong>Originality:</strong> Aim to provide new insights or challenge existing assumptions within the financial analysis domain.</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

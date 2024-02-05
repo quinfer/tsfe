@@ -1,0 +1,84 @@
+---
+title: "crypto api"
+author: "Barry and Claude.ai"
+editor: visual
+---
+
+There are a few good APIs you can use to download cryptocurrency high frequency data:
+
+1.  **CoinAPI** - They provide historical trade, OHLCV, order book and tick data for many major crypto exchanges like Binance, Coinbase, Kraken, etc. The API can return data in JSON, CBOR or CSV formats. They have a free tier but full access requires a paid plan.
+
+2.  **Nomics** - Nomics offers historical tick-level OHLCV data on thousands of crypto pairs going back several years. They have a free tier and various paid subscription plans. The API returns JSON formatted data.
+
+3.  **Kaiko** - Specializes in institutional-grade crypto data. Their API provides tick-by-tick trade data, OHLCV bars, order books, etc. Coverage spans spot, derivatives and DeFi markets. Offers high-precision timestamps. Requires an enterprise subscription.
+
+4.  **Bravenewcoin Liquid Index API** - Provides historical OHLCV data on Bravenewcoin's benchmark liquidity indices for Bitcoin, Ethereum and other assets. Free registration required and rate limits apply.
+
+5.  **Cryptowatch API** - For getting recent trade data, OHLCV bars, order books across major crypto exchanges like Binance, Coinbase Pro, Kraken and Bitfinex. Provides WebSocket streams for real-time data.
+
+I'd recommend CoinAPI or Nomics to start since they have free tiers. Kaiko is best for precision data but expensive.
+
+```{python}
+import requests
+
+url = "https://rest.coinapi.io/v1/trades/:symbol_id/history"
+
+payload={}
+headers = {
+  'Accept': 'text/plain',
+  'X-CoinAPI-Key': 'E4F66558-5C19-407D-AA09-CB3A1CE8F2BF'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```{python}
+import requests
+import datetime
+import pandas as pd
+
+# CoinAPI credentials
+API_KEY = 'E4F66558-5C19-407D-AA09-CB3A1CE8F2BF' 
+
+# Define parameters
+symbol = 'BTC'
+exchange = 'BITSTAMP'
+start_date = datetime.date(2023, 2, 1)
+end_date = datetime.date(2023, 2, 15)
+
+# Build request URL
+url = f'https://rest.coinapi.io/v1/trades/{symbol}/{exchange}?limit=10000&apikey={API_KEY}'
+params = {'time_start': str(start_date), 'time_end': str(end_date)}
+
+# Send request
+response = requests.get(url, params=params)
+data = response.json()
+
+# Convert to Pandas DataFrame
+df = pd.DataFrame(data)
+
+# Preview data
+print(df.head())
+
+# Export to CSV
+df.to_csv('coinapi_btc_data.csv', index=False)
+
+```
+
+Here are some tips to ensure you don't exceed the rate limits and allowances on CoinAPI's free plan:
+
+1.  **Check usage regularly** - Log into your CoinAPI account to monitor how many API calls and data downloads you have used out of your monthly quota. This helps avoid surprise overages.
+
+2.  **Use date ranges judiciously** - Size your API calls to only request the minimum date periods needed instead of maxing out full month chunks every time. This conserves your API allowance.
+
+3.  **Limit concurrent requests** - Avoid slamming their servers with a high number API requests in parallel. Use a small thread pool size when making concurrent calls.
+
+4.  **Cache responses** - Store the API responses you get in a local database or file cache and check there first before making fresh API calls for the same thing. This saves hitting API limits.
+
+5.  **Use time series responsibly** - For time series data, store last updated timestamp locally and use it set API time parameters to only get latest deltas instead of entire sets each time.
+
+6.  **Upgrade if needed** - If you're hitting restrictions on the free tier with your usage levels, consider upgrading to a paid monthly plan which offer higher API quotas.
+
+Implementing throttling, caching, reuse of downloaded data and checking usage levels are key techniques to remain within the generous but still limited allowances offered under CoinAPI's free account tier specifically. Let me know if you have any other questions!
