@@ -21,7 +21,7 @@ I'd recommend CoinAPI or Nomics to start since they have free tiers. Kaiko is be
 ```{python}
 import requests
 
-url = "https://rest.coinapi.io/v1/trades/:symbol_id/history"
+url = "https://rest.coinapi.io/v1/trades/:BTC/history"
 
 payload={}
 headers = {
