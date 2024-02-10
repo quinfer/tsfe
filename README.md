@@ -1,9 +1,14 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # tsfe
 
-<img src="inst/figures/rw_hex.png" width="20%">
+<img src="inst/figures/rw_hex.png" width="20%"/>
 
 [![DOI](https://zenodo.org/badge/342634123.svg)](https://zenodo.org/badge/latestdoi/342634123)
 
@@ -79,411 +84,276 @@ This package also includes a RMarkdown template for use in the project
 report. Go to File\>New\>R Markdown… and choose from `From Template`
 then `project-report`. There are four sections in the report
 
-  - Introduction and literature review
-  - Data and methodology
-  - Results
-  - Discussion
+-   Introduction and literature review
+-   Data and methodology
+-   Results
+-   Discussion
 
 The marks are allocated equally to each section.
 
 ### Indicative marking scheme
 
-<table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
-
-<thead>
-
-<tr>
-
-<th style="text-align:left;">
-
-criterion
-
-</th>
-
-<th style="text-align:left;">
-
-description\_Expectation not met
-
-</th>
-
-<th style="text-align:left;">
-
-description\_Approaching Expectation
-
-</th>
-
-<th style="text-align:left;">
-
-description\_Meets Expectation
-
-</th>
-
-<th style="text-align:left;">
-
-description\_Exceeds Expectation
-
-</th>
-
-<th style="text-align:left;">
-
-value\_Expectation not met
-
-</th>
-
-<th style="text-align:left;">
-
-value\_Approaching Expectation
-
-</th>
-
-<th style="text-align:left;">
-
-value\_Meets Expectation
-
-</th>
-
-<th style="text-align:left;">
-
-value\_Exceeds Expectation
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td style="text-align:left;">
-
-Intro+Lit
-
-</td>
-
-<td style="text-align:left;">
-
-The introduction needs a lot more work. A poor and incomplete review of
-the literature which doesn’t show any critical ability.
-
-</td>
-
-<td style="text-align:left;">
-
-The introduction broadly sets out the problem but could be much
-improved. The literature review requires more content and critical
-comment.
-
-</td>
-
-<td style="text-align:left;">
-
-An adequate introduction which broadly sets out the problem. A good
-literature review that sets out some of the relevant literature but need
-more critique.
-
-</td>
-
-<td style="text-align:left;">
-
-A very good introduction which is easy to read and introduces the
-problem well, setting out the overall project aim. A very good
-literature review, detailing the relevant literature and critiquing it.
-
-</td>
-
-<td style="text-align:left;">
-
-5
-
-</td>
-
-<td style="text-align:left;">
-
-15
-
-</td>
-
-<td style="text-align:left;">
-
-20
-
-</td>
-
-<td style="text-align:left;">
-
-25
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:left;">
-
-Data+methods
-
-</td>
-
-<td style="text-align:left;">
-
-A poor model is used with very little critical comment.
-
-</td>
-
-<td style="text-align:left;">
-
-Appropriate model and estimation techniques are used but little critique
-is used.
-
-</td>
-
-<td style="text-align:left;">
-
-A good model construct and use of the standard estimation techniques.
-There is some critique of the methods.
-
-</td>
-
-<td style="text-align:left;">
-
-A very good model construction with critical comments of its use.
-Estimation techniques are well laid out and critiqued, with some
-improvements mentioned.
-
-</td>
-
-<td style="text-align:left;">
-
-5
-
-</td>
-
-<td style="text-align:left;">
-
-15
-
-</td>
-
-<td style="text-align:left;">
-
-20
-
-</td>
-
-<td style="text-align:left;">
-
-25
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:left;">
-
-Results
-
-</td>
-
-<td style="text-align:left;">
-
-Results are not well defined and the use of tables and graphs needs much
-more work.
-
-</td>
-
-<td style="text-align:left;">
-
-Poor use of graphs and tables. Inferences are poor and are not well
-related to previous empirical research.
-
-</td>
-
-<td style="text-align:left;">
-
-There is appropriate use of both tables and graphs. The inferences on
-results are good but have sparse critical comments. Improvement could be
-made with more contextual comment about previous empirical results.
-
-</td>
-
-<td style="text-align:left;">
-
-Very good use is made of both tables and graphs. The most interesting
-features of the results are well identified with inferences related to
-overall project aims. A excellent critique of your results using
-previous empirical research.
-
-</td>
-
-<td style="text-align:left;">
-
-5
-
-</td>
-
-<td style="text-align:left;">
-
-15
-
-</td>
-
-<td style="text-align:left;">
-
-20
-
-</td>
-
-<td style="text-align:left;">
-
-25
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:left;">
-
-Discussion
-
-</td>
-
-<td style="text-align:left;">
-
-Poor and incomplete inferences and conclusions from the previous
-sections
-
-</td>
-
-<td style="text-align:left;">
-
-Some inference from the previous sections.
-
-</td>
-
-<td style="text-align:left;">
-
-Good use of critical inferences with some reference to how findings are
-related to the existing literature.
-
-</td>
-
-<td style="text-align:left;">
-
-Excellent use of critical inferences with well thought out critique
-given the literature described in the previous sections.
-
-</td>
-
-<td style="text-align:left;">
-
-5
-
-</td>
-
-<td style="text-align:left;">
-
-15
-
-</td>
-
-<td style="text-align:left;">
-
-20
-
-</td>
-
-<td style="text-align:left;">
-
-25
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align:left;">
-
-Originality
-
-</td>
-
-<td style="text-align:left;">
-
-Lacking methodological application. Adequately argued. Basic
-understanding and knowledge. Gaps or inaccuracies but not
-damaging.Little relevance material and/or inaccurate answer or
-incomplete. Disorganised and irrelevant material and misunderstanding.
-Minimal or no relevant material.
-
-</td>
-
-<td style="text-align:left;">
-
-Very good knowledge and understanding of module content. Well argued
-answers. Evidence of originality and critical judgement. Sound
-methodology. Critical judgement and some grasp of complex issuesGood
-knowledge and understanding of the module content. Reasonably
-well-argued. Largely descriptive or narrative in focus. Methodological
-application is not consistent or thorough.
-
-</td>
-
-<td style="text-align:left;">
-
-Very good knowledge and understanding of module content. Well argued
-answers. Evidence of originality and critical judgement. Sound
-methodology. Critical judgement and some grasp of complex issu
-
-</td>
-
-<td style="text-align:left;">
-
-Thorough and systematic knowledge and understanding of the module
-content. A clear grasp of the issues involved, with evidence of
-innovative and the original use of learning resources. Knowledge beyond
-module content. Clear evidence of independent thought and originality.
-Methodological rigour. High critical judgement and a confident grasp of
-complex issues
-
-</td>
-
-<td style="text-align:left;">
-
-5
-
-</td>
-
-<td style="text-align:left;">
-
-18
-
-</td>
-
-<td style="text-align:left;">
-
-28
-
-</td>
-
-<td style="text-align:left;">
-
-40
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
++-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| crit  | d     | d     | descr | de    | value | value | valu  | v     |
+| erion | escri | escri | iptio | scrip | \\\_E | \\\_A | e\\\_ | alue\ |
+|       | ption | ption | n\\\_ | tion\ | xpect | pproa | Meets | \\_Ex |
+|       | \\\_E | \\\_A | Meets | \\_Ex | ation | ching | E     | ceeds |
+|       | xpect | pproa | E     | ceeds | not   | E     | xpect | E     |
+|       | ation | ching | xpect | E     | met   | xpect | ation | xpect |
+|       | not   | E     | ation | xpect |       | ation |       | ation |
+|       | met   | xpect |       | ation |       |       |       |       |
+|       |       | ation |       |       |       |       |       |       |
++:======+:======+:======+:======+:======+:======+:======+:======+:======+
+| Intr  | The   | The   | An    | A     | 5     | 15    | 20    | 25    |
+| o+Lit | in    | in    | ade   | very  |       |       |       |       |
+|       | trodu | trodu | quate | good  |       |       |       |       |
+|       | ction | ction | in    | in    |       |       |       |       |
+|       | needs | br    | trodu | trodu |       |       |       |       |
+|       | a lot | oadly | ction | ction |       |       |       |       |
+|       | more  | sets  | which | which |       |       |       |       |
+|       | work. | out   | br    | is    |       |       |       |       |
+|       | A     | the   | oadly | easy  |       |       |       |       |
+|       | poor  | pr    | sets  | to    |       |       |       |       |
+|       | and   | oblem | out   | read  |       |       |       |       |
+|       | incom | but   | the   | and   |       |       |       |       |
+|       | plete | could | pro   | intro |       |       |       |       |
+|       | r     | be    | blem. | duces |       |       |       |       |
+|       | eview | much  | A     | the   |       |       |       |       |
+|       | of    | impr  | good  | pr    |       |       |       |       |
+|       | the   | oved. | liter | oblem |       |       |       |       |
+|       | liter | The   | ature | well, |       |       |       |       |
+|       | ature | liter | r     | se    |       |       |       |       |
+|       | which | ature | eview | tting |       |       |       |       |
+|       | do    | r     | that  | out   |       |       |       |       |
+|       | esn’t | eview | sets  | the   |       |       |       |       |
+|       | show  | req   | out   | ov    |       |       |       |       |
+|       | any   | uires | some  | erall |       |       |       |       |
+|       | cri   | more  | of    | pr    |       |       |       |       |
+|       | tical | co    | the   | oject |       |       |       |       |
+|       | abi   | ntent | rel   | aim.  |       |       |       |       |
+|       | lity. | and   | evant | A     |       |       |       |       |
+|       |       | cri   | liter | very  |       |       |       |       |
+|       |       | tical | ature | good  |       |       |       |       |
+|       |       | com   | but   | liter |       |       |       |       |
+|       |       | ment. | need  | ature |       |       |       |       |
+|       |       |       | more  | re    |       |       |       |       |
+|       |       |       | crit  | view, |       |       |       |       |
+|       |       |       | ique. | deta  |       |       |       |       |
+|       |       |       |       | iling |       |       |       |       |
+|       |       |       |       | the   |       |       |       |       |
+|       |       |       |       | rel   |       |       |       |       |
+|       |       |       |       | evant |       |       |       |       |
+|       |       |       |       | liter |       |       |       |       |
+|       |       |       |       | ature |       |       |       |       |
+|       |       |       |       | and   |       |       |       |       |
+|       |       |       |       | criti |       |       |       |       |
+|       |       |       |       | quing |       |       |       |       |
+|       |       |       |       | it.   |       |       |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| Da    | A     | A     | A     | A     | 5     | 15    | 20    | 25    |
+| ta+me | poor  | pprop | good  | very  |       |       |       |       |
+| thods | model | riate | model | good  |       |       |       |       |
+|       | is    | model | cons  | model |       |       |       |       |
+|       | used  | and   | truct | co    |       |       |       |       |
+|       | with  | estim | and   | nstru |       |       |       |       |
+|       | very  | ation | use   | ction |       |       |       |       |
+|       | l     | techn | of    | with  |       |       |       |       |
+|       | ittle | iques | the   | cri   |       |       |       |       |
+|       | cri   | are   | sta   | tical |       |       |       |       |
+|       | tical | used  | ndard | com   |       |       |       |       |
+|       | com   | but   | estim | ments |       |       |       |       |
+|       | ment. | l     | ation | of    |       |       |       |       |
+|       |       | ittle | t     | its   |       |       |       |       |
+|       |       | cri   | echni | use.  |       |       |       |       |
+|       |       | tique | ques. | Estim |       |       |       |       |
+|       |       | is    | There | ation |       |       |       |       |
+|       |       | used. | is    | techn |       |       |       |       |
+|       |       |       | some  | iques |       |       |       |       |
+|       |       |       | cri   | are   |       |       |       |       |
+|       |       |       | tique | well  |       |       |       |       |
+|       |       |       | of    | laid  |       |       |       |       |
+|       |       |       | the   | out   |       |       |       |       |
+|       |       |       | met   | and   |       |       |       |       |
+|       |       |       | hods. | criti |       |       |       |       |
+|       |       |       |       | qued, |       |       |       |       |
+|       |       |       |       | with  |       |       |       |       |
+|       |       |       |       | some  |       |       |       |       |
+|       |       |       |       | im    |       |       |       |       |
+|       |       |       |       | prove |       |       |       |       |
+|       |       |       |       | ments |       |       |       |       |
+|       |       |       |       | menti |       |       |       |       |
+|       |       |       |       | oned. |       |       |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| Re    | Re    | Poor  | There | Very  | 5     | 15    | 20    | 25    |
+| sults | sults | use   | is    | good  |       |       |       |       |
+|       | are   | of    | a     | use   |       |       |       |       |
+|       | not   | g     | pprop | is    |       |       |       |       |
+|       | well  | raphs | riate | made  |       |       |       |       |
+|       | de    | and   | use   | of    |       |       |       |       |
+|       | fined | ta    | of    | both  |       |       |       |       |
+|       | and   | bles. | both  | t     |       |       |       |       |
+|       | the   | Infer | t     | ables |       |       |       |       |
+|       | use   | ences | ables | and   |       |       |       |       |
+|       | of    | are   | and   | gr    |       |       |       |       |
+|       | t     | poor  | gr    | aphs. |       |       |       |       |
+|       | ables | and   | aphs. | The   |       |       |       |       |
+|       | and   | are   | The   | most  |       |       |       |       |
+|       | g     | not   | infer | i     |       |       |       |       |
+|       | raphs | well  | ences | ntere |       |       |       |       |
+|       | needs | re    | on    | sting |       |       |       |       |
+|       | much  | lated | re    | fea   |       |       |       |       |
+|       | more  | to    | sults | tures |       |       |       |       |
+|       | work. | pre   | are   | of    |       |       |       |       |
+|       |       | vious | good  | the   |       |       |       |       |
+|       |       | empi  | but   | re    |       |       |       |       |
+|       |       | rical | have  | sults |       |       |       |       |
+|       |       | rese  | s     | are   |       |       |       |       |
+|       |       | arch. | parse | well  |       |       |       |       |
+|       |       |       | cri   | ident |       |       |       |       |
+|       |       |       | tical | ified |       |       |       |       |
+|       |       |       | comm  | with  |       |       |       |       |
+|       |       |       | ents. | infer |       |       |       |       |
+|       |       |       | I     | ences |       |       |       |       |
+|       |       |       | mprov | re    |       |       |       |       |
+|       |       |       | ement | lated |       |       |       |       |
+|       |       |       | could | to    |       |       |       |       |
+|       |       |       | be    | ov    |       |       |       |       |
+|       |       |       | made  | erall |       |       |       |       |
+|       |       |       | with  | pr    |       |       |       |       |
+|       |       |       | more  | oject |       |       |       |       |
+|       |       |       | conte | aims. |       |       |       |       |
+|       |       |       | xtual | A     |       |       |       |       |
+|       |       |       | co    | exce  |       |       |       |       |
+|       |       |       | mment | llent |       |       |       |       |
+|       |       |       | about | cri   |       |       |       |       |
+|       |       |       | pre   | tique |       |       |       |       |
+|       |       |       | vious | of    |       |       |       |       |
+|       |       |       | empi  | your  |       |       |       |       |
+|       |       |       | rical | re    |       |       |       |       |
+|       |       |       | res   | sults |       |       |       |       |
+|       |       |       | ults. | using |       |       |       |       |
+|       |       |       |       | pre   |       |       |       |       |
+|       |       |       |       | vious |       |       |       |       |
+|       |       |       |       | empi  |       |       |       |       |
+|       |       |       |       | rical |       |       |       |       |
+|       |       |       |       | rese  |       |       |       |       |
+|       |       |       |       | arch. |       |       |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| Discu | Poor  | Some  | Good  | Exce  | 5     | 15    | 20    | 25    |
+| ssion | and   | infe  | use   | llent |       |       |       |       |
+|       | incom | rence | of    | use   |       |       |       |       |
+|       | plete | from  | cri   | of    |       |       |       |       |
+|       | infer | the   | tical | cri   |       |       |       |       |
+|       | ences | pre   | infer | tical |       |       |       |       |
+|       | and   | vious | ences | infer |       |       |       |       |
+|       | c     | sect  | with  | ences |       |       |       |       |
+|       | onclu | ions. | some  | with  |       |       |       |       |
+|       | sions |       | refe  | well  |       |       |       |       |
+|       | from  |       | rence | th    |       |       |       |       |
+|       | the   |       | to    | ought |       |       |       |       |
+|       | pre   |       | how   | out   |       |       |       |       |
+|       | vious |       | fin   | cri   |       |       |       |       |
+|       | sec   |       | dings | tique |       |       |       |       |
+|       | tions |       | are   | given |       |       |       |       |
+|       |       |       | re    | the   |       |       |       |       |
+|       |       |       | lated | liter |       |       |       |       |
+|       |       |       | to    | ature |       |       |       |       |
+|       |       |       | the   | desc  |       |       |       |       |
+|       |       |       | exi   | ribed |       |       |       |       |
+|       |       |       | sting | in    |       |       |       |       |
+|       |       |       | l     | the   |       |       |       |       |
+|       |       |       | itera | pre   |       |       |       |       |
+|       |       |       | ture. | vious |       |       |       |       |
+|       |       |       |       | sect  |       |       |       |       |
+|       |       |       |       | ions. |       |       |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+
+| Ori   | La    | Very  | Very  | Tho   | 5     | 18    | 28    | 40    |
+| ginal | cking | good  | good  | rough |       |       |       |       |
+| ity + | meth  | know  | know  | and   |       |       |       |       |
+| Refle | odolo | ledge | ledge | syste |       |       |       |       |
+| ctive | gical | and   | and   | matic |       |       |       |       |
+| Essay | ap    | und   | und   | know  |       |       |       |       |
+|       | plica | ersta | ersta | ledge |       |       |       |       |
+|       | tion. | nding | nding | and   |       |       |       |       |
+|       | Adequ | of    | of    | und   |       |       |       |       |
+|       | ately | m     | m     | ersta |       |       |       |       |
+|       | ar    | odule | odule | nding |       |       |       |       |
+|       | gued. | con   | con   | of    |       |       |       |       |
+|       | Basic | tent. | tent. | the   |       |       |       |       |
+|       | und   | Well  | Well  | m     |       |       |       |       |
+|       | ersta | a     | a     | odule |       |       |       |       |
+|       | nding | rgued | rgued | con   |       |       |       |       |
+|       | and   | ans   | ans   | tent. |       |       |       |       |
+|       | knowl | wers. | wers. | A     |       |       |       |       |
+|       | edge. | Evi   | Evi   | clear |       |       |       |       |
+|       | Gaps  | dence | dence | grasp |       |       |       |       |
+|       | or    | of    | of    | of    |       |       |       |       |
+|       | in    | o     | o     | the   |       |       |       |       |
+|       | accur | rigin | rigin | i     |       |       |       |       |
+|       | acies | ality | ality | ssues |       |       |       |       |
+|       | but   | and   | and   | invo  |       |       |       |       |
+|       | not   | cri   | cri   | lved, |       |       |       |       |
+|       | damag | tical | tical | with  |       |       |       |       |
+|       | ing.L | judge | judge | evi   |       |       |       |       |
+|       | ittle | ment. | ment. | dence |       |       |       |       |
+|       | rele  | Sound | Sound | of    |       |       |       |       |
+|       | vance | me    | me    | innov |       |       |       |       |
+|       | mat   | thodo | thodo | ative |       |       |       |       |
+|       | erial | logy. | logy. | and   |       |       |       |       |
+|       | a     | Cri   | Cri   | the   |       |       |       |       |
+|       | nd/or | tical | tical | ori   |       |       |       |       |
+|       | inacc | judg  | judg  | ginal |       |       |       |       |
+|       | urate | ement | ement | use   |       |       |       |       |
+|       | a     | and   | and   | of    |       |       |       |       |
+|       | nswer | some  | some  | lea   |       |       |       |       |
+|       | or    | grasp | grasp | rning |       |       |       |       |
+|       | i     | of    | of    | resou |       |       |       |       |
+|       | ncomp | co    | co    | rces. |       |       |       |       |
+|       | lete. | mplex | mplex | Know  |       |       |       |       |
+|       | Di    | issue | issu  | ledge |       |       |       |       |
+|       | sorga | sGood |       | b     |       |       |       |       |
+|       | nised | know  |       | eyond |       |       |       |       |
+|       | and   | ledge |       | m     |       |       |       |       |
+|       | irrel | and   |       | odule |       |       |       |       |
+|       | evant | und   |       | con   |       |       |       |       |
+|       | mat   | ersta |       | tent. |       |       |       |       |
+|       | erial | nding |       | Clear |       |       |       |       |
+|       | and   | of    |       | evi   |       |       |       |       |
+|       | mi    | the   |       | dence |       |       |       |       |
+|       | sunde | m     |       | of    |       |       |       |       |
+|       | rstan | odule |       | i     |       |       |       |       |
+|       | ding. | con   |       | ndepe |       |       |       |       |
+|       | Mi    | tent. |       | ndent |       |       |       |       |
+|       | nimal | Reaso |       | th    |       |       |       |       |
+|       | or no | nably |       | ought |       |       |       |       |
+|       | rel   | we    |       | and   |       |       |       |       |
+|       | evant | ll-ar |       | or    |       |       |       |       |
+|       | mate  | gued. |       | igina |       |       |       |       |
+|       | rial. | La    |       | lity. |       |       |       |       |
+|       |       | rgely |       | Meth  |       |       |       |       |
+|       |       | d     |       | odolo |       |       |       |       |
+|       |       | escri |       | gical |       |       |       |       |
+|       |       | ptive |       | ri    |       |       |       |       |
+|       |       | or    |       | gour. |       |       |       |       |
+|       |       | narr  |       | High  |       |       |       |       |
+|       |       | ative |       | cri   |       |       |       |       |
+|       |       | in    |       | tical |       |       |       |       |
+|       |       | f     |       | judg  |       |       |       |       |
+|       |       | ocus. |       | ement |       |       |       |       |
+|       |       | Meth  |       | and a |       |       |       |       |
+|       |       | odolo |       | conf  |       |       |       |       |
+|       |       | gical |       | ident |       |       |       |       |
+|       |       | a     |       | grasp |       |       |       |       |
+|       |       | pplic |       | of    |       |       |       |       |
+|       |       | ation |       | co    |       |       |       |       |
+|       |       | is    |       | mplex |       |       |       |       |
+|       |       | not   |       | i     |       |       |       |       |
+|       |       | consi |       | ssues |       |       |       |       |
+|       |       | stent |       |       |       |       |       |       |
+|       |       | or    |       |       |       |       |       |       |
+|       |       | thor  |       |       |       |       |       |       |
+|       |       | ough. |       |       |       |       |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+
 
 ## Datasets
 

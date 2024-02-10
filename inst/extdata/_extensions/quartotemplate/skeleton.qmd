@@ -1,7 +1,10 @@
 ---
-title: "FIN7028 template"
-author: ""
-format: html
+title: "<Title of your Project>"
+author: "<Student Name>"
+format:
+  html:
+    theme: cosmo
+    toc: true
 editor: visual
 bibliography: ref.bib
 execute:
@@ -64,6 +67,12 @@ Summarise and state your critical assessment using any evidence you have provide
 ## Reference
 
 *This is where the cited references should appear when you render the document to a html*
+
+## Appendix
+
+### GenAI+LLM results
+
+### Reflective Essay on your use of GenAI+LLMs
 
 # Some examples of interactive content
 
