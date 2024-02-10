@@ -96,13 +96,13 @@ The marks are allocated equally to each section.
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+
 | crit  | d     | d     | descr | de    | value | value | valu  | v     |
 | erion | escri | escri | iptio | scrip | \\\_E | \\\_A | e\\\_ | alue\ |
-|       | ption | ption | n\\\_ | tion\ | xpect | pproa | Meets | \\_Ex |
-|       | \\\_E | \\\_A | Meets | \\_Ex | ation | ching | E     | ceeds |
-|       | xpect | pproa | E     | ceeds | not   | E     | xpect | E     |
-|       | ation | ching | xpect | E     | met   | xpect | ation | xpect |
-|       | not   | E     | ation | xpect |       | ation |       | ation |
-|       | met   | xpect |       | ation |       |       |       |       |
-|       |       | ation |       |       |       |       |       |       |
+|       | ption | ption | n\\\_ | tion\ | xpect | pproa | Meets | \     |
+|       | \\\_E | \\\_A | Meets | \     | ation | ching | E     | \\_Ex |
+|       | xpect | pproa | E     | \\_Ex | not   | E     | xpect | ceeds |
+|       | ation | ching | xpect | ceeds | met   | xpect | ation | E     |
+|       | not   | E     | ation | E     |       | ation |       | xpect |
+|       | met   | xpect |       | xpect |       |       |       | ation |
+|       |       | ation |       | ation |       |       |       |       |
 +:======+:======+:======+:======+:======+:======+:======+:======+:======+
 | Intr  | The   | The   | An    | A     | 5     | 15    | 20    | 25    |
 | o+Lit | in    | in    | ade   | very  |       |       |       |       |
@@ -161,13 +161,13 @@ The marks are allocated equally to each section.
 |       | ittle | iques | the   | cri   |       |       |       |       |
 |       | cri   | are   | sta   | tical |       |       |       |       |
 |       | tical | used  | ndard | com   |       |       |       |       |
-|       | com   | but   | estim | ments |       |       |       |       |
-|       | ment. | l     | ation | of    |       |       |       |       |
-|       |       | ittle | t     | its   |       |       |       |       |
-|       |       | cri   | echni | use.  |       |       |       |       |
-|       |       | tique | ques. | Estim |       |       |       |       |
-|       |       | is    | There | ation |       |       |       |       |
-|       |       | used. | is    | techn |       |       |       |       |
+|       | com   | but l | estim | ments |       |       |       |       |
+|       | ment. | ittle | ation | of    |       |       |       |       |
+|       |       | cri   | t     | its   |       |       |       |       |
+|       |       | tique | echni | use.  |       |       |       |       |
+|       |       | is    | ques. | Estim |       |       |       |       |
+|       |       | used. | There | ation |       |       |       |       |
+|       |       |       | is    | techn |       |       |       |       |
 |       |       |       | some  | iques |       |       |       |       |
 |       |       |       | cri   | are   |       |       |       |       |
 |       |       |       | tique | well  |       |       |       |       |
@@ -185,53 +185,52 @@ The marks are allocated equally to each section.
 |       |       |       |       | oned. |       |       |       |       |
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+
 | Re    | Re    | Poor  | There | Very  | 5     | 15    | 20    | 25    |
-| sults | sults | use   | is    | good  |       |       |       |       |
-|       | are   | of    | a     | use   |       |       |       |       |
-|       | not   | g     | pprop | is    |       |       |       |       |
-|       | well  | raphs | riate | made  |       |       |       |       |
-|       | de    | and   | use   | of    |       |       |       |       |
-|       | fined | ta    | of    | both  |       |       |       |       |
-|       | and   | bles. | both  | t     |       |       |       |       |
-|       | the   | Infer | t     | ables |       |       |       |       |
-|       | use   | ences | ables | and   |       |       |       |       |
-|       | of    | are   | and   | gr    |       |       |       |       |
-|       | t     | poor  | gr    | aphs. |       |       |       |       |
-|       | ables | and   | aphs. | The   |       |       |       |       |
-|       | and   | are   | The   | most  |       |       |       |       |
-|       | g     | not   | infer | i     |       |       |       |       |
-|       | raphs | well  | ences | ntere |       |       |       |       |
-|       | needs | re    | on    | sting |       |       |       |       |
-|       | much  | lated | re    | fea   |       |       |       |       |
-|       | more  | to    | sults | tures |       |       |       |       |
-|       | work. | pre   | are   | of    |       |       |       |       |
-|       |       | vious | good  | the   |       |       |       |       |
-|       |       | empi  | but   | re    |       |       |       |       |
-|       |       | rical | have  | sults |       |       |       |       |
-|       |       | rese  | s     | are   |       |       |       |       |
-|       |       | arch. | parse | well  |       |       |       |       |
-|       |       |       | cri   | ident |       |       |       |       |
-|       |       |       | tical | ified |       |       |       |       |
-|       |       |       | comm  | with  |       |       |       |       |
-|       |       |       | ents. | infer |       |       |       |       |
-|       |       |       | I     | ences |       |       |       |       |
-|       |       |       | mprov | re    |       |       |       |       |
-|       |       |       | ement | lated |       |       |       |       |
-|       |       |       | could | to    |       |       |       |       |
-|       |       |       | be    | ov    |       |       |       |       |
-|       |       |       | made  | erall |       |       |       |       |
-|       |       |       | with  | pr    |       |       |       |       |
-|       |       |       | more  | oject |       |       |       |       |
-|       |       |       | conte | aims. |       |       |       |       |
-|       |       |       | xtual | A     |       |       |       |       |
-|       |       |       | co    | exce  |       |       |       |       |
-|       |       |       | mment | llent |       |       |       |       |
-|       |       |       | about | cri   |       |       |       |       |
-|       |       |       | pre   | tique |       |       |       |       |
-|       |       |       | vious | of    |       |       |       |       |
-|       |       |       | empi  | your  |       |       |       |       |
-|       |       |       | rical | re    |       |       |       |       |
-|       |       |       | res   | sults |       |       |       |       |
-|       |       |       | ults. | using |       |       |       |       |
+| sults | sults | use   | is a  | good  |       |       |       |       |
+|       | are   | of g  | pprop | use   |       |       |       |       |
+|       | not   | raphs | riate | is    |       |       |       |       |
+|       | well  | and   | use   | made  |       |       |       |       |
+|       | de    | ta    | of    | of    |       |       |       |       |
+|       | fined | bles. | both  | both  |       |       |       |       |
+|       | and   | Infer | t     | t     |       |       |       |       |
+|       | the   | ences | ables | ables |       |       |       |       |
+|       | use   | are   | and   | and   |       |       |       |       |
+|       | of t  | poor  | gr    | gr    |       |       |       |       |
+|       | ables | and   | aphs. | aphs. |       |       |       |       |
+|       | and g | are   | The   | The   |       |       |       |       |
+|       | raphs | not   | infer | most  |       |       |       |       |
+|       | needs | well  | ences | i     |       |       |       |       |
+|       | much  | re    | on re | ntere |       |       |       |       |
+|       | more  | lated | sults | sting |       |       |       |       |
+|       | work. | to    | are   | fea   |       |       |       |       |
+|       |       | pre   | good  | tures |       |       |       |       |
+|       |       | vious | but   | of    |       |       |       |       |
+|       |       | empi  | have  | the   |       |       |       |       |
+|       |       | rical | s     | re    |       |       |       |       |
+|       |       | rese  | parse | sults |       |       |       |       |
+|       |       | arch. | cri   | are   |       |       |       |       |
+|       |       |       | tical | well  |       |       |       |       |
+|       |       |       | comm  | ident |       |       |       |       |
+|       |       |       | ents. | ified |       |       |       |       |
+|       |       |       | I     | with  |       |       |       |       |
+|       |       |       | mprov | infer |       |       |       |       |
+|       |       |       | ement | ences |       |       |       |       |
+|       |       |       | could | re    |       |       |       |       |
+|       |       |       | be    | lated |       |       |       |       |
+|       |       |       | made  | to ov |       |       |       |       |
+|       |       |       | with  | erall |       |       |       |       |
+|       |       |       | more  | pr    |       |       |       |       |
+|       |       |       | conte | oject |       |       |       |       |
+|       |       |       | xtual | aims. |       |       |       |       |
+|       |       |       | co    | A     |       |       |       |       |
+|       |       |       | mment | exce  |       |       |       |       |
+|       |       |       | about | llent |       |       |       |       |
+|       |       |       | pre   | cri   |       |       |       |       |
+|       |       |       | vious | tique |       |       |       |       |
+|       |       |       | empi  | of    |       |       |       |       |
+|       |       |       | rical | your  |       |       |       |       |
+|       |       |       | res   | re    |       |       |       |       |
+|       |       |       | ults. | sults |       |       |       |       |
+|       |       |       |       | using |       |       |       |       |
 |       |       |       |       | pre   |       |       |       |       |
 |       |       |       |       | vious |       |       |       |       |
 |       |       |       |       | empi  |       |       |       |       |
@@ -245,16 +244,16 @@ The marks are allocated equally to each section.
 |       | plete | from  | cri   | of    |       |       |       |       |
 |       | infer | the   | tical | cri   |       |       |       |       |
 |       | ences | pre   | infer | tical |       |       |       |       |
-|       | and   | vious | ences | infer |       |       |       |       |
-|       | c     | sect  | with  | ences |       |       |       |       |
-|       | onclu | ions. | some  | with  |       |       |       |       |
-|       | sions |       | refe  | well  |       |       |       |       |
-|       | from  |       | rence | th    |       |       |       |       |
-|       | the   |       | to    | ought |       |       |       |       |
-|       | pre   |       | how   | out   |       |       |       |       |
-|       | vious |       | fin   | cri   |       |       |       |       |
-|       | sec   |       | dings | tique |       |       |       |       |
-|       | tions |       | are   | given |       |       |       |       |
+|       | and c | vious | ences | infer |       |       |       |       |
+|       | onclu | sect  | with  | ences |       |       |       |       |
+|       | sions | ions. | some  | with  |       |       |       |       |
+|       | from  |       | refe  | well  |       |       |       |       |
+|       | the   |       | rence | th    |       |       |       |       |
+|       | pre   |       | to    | ought |       |       |       |       |
+|       | vious |       | how   | out   |       |       |       |       |
+|       | sec   |       | fin   | cri   |       |       |       |       |
+|       | tions |       | dings | tique |       |       |       |       |
+|       |       |       | are   | given |       |       |       |       |
 |       |       |       | re    | the   |       |       |       |       |
 |       |       |       | lated | liter |       |       |       |       |
 |       |       |       | to    | ature |       |       |       |       |
@@ -275,81 +274,76 @@ The marks are allocated equally to each section.
 | Essay | ap    | und   | und   | know  |       |       |       |       |
 |       | plica | ersta | ersta | ledge |       |       |       |       |
 |       | tion. | nding | nding | and   |       |       |       |       |
-|       | Adequ | of    | of    | und   |       |       |       |       |
-|       | ately | m     | m     | ersta |       |       |       |       |
-|       | ar    | odule | odule | nding |       |       |       |       |
-|       | gued. | con   | con   | of    |       |       |       |       |
-|       | Basic | tent. | tent. | the   |       |       |       |       |
-|       | und   | Well  | Well  | m     |       |       |       |       |
-|       | ersta | a     | a     | odule |       |       |       |       |
-|       | nding | rgued | rgued | con   |       |       |       |       |
-|       | and   | ans   | ans   | tent. |       |       |       |       |
-|       | knowl | wers. | wers. | A     |       |       |       |       |
-|       | edge. | Evi   | Evi   | clear |       |       |       |       |
-|       | Gaps  | dence | dence | grasp |       |       |       |       |
-|       | or    | of    | of    | of    |       |       |       |       |
-|       | in    | o     | o     | the   |       |       |       |       |
-|       | accur | rigin | rigin | i     |       |       |       |       |
-|       | acies | ality | ality | ssues |       |       |       |       |
-|       | but   | and   | and   | invo  |       |       |       |       |
-|       | not   | cri   | cri   | lved, |       |       |       |       |
-|       | damag | tical | tical | with  |       |       |       |       |
-|       | ing.L | judge | judge | evi   |       |       |       |       |
-|       | ittle | ment. | ment. | dence |       |       |       |       |
-|       | rele  | Sound | Sound | of    |       |       |       |       |
-|       | vance | me    | me    | innov |       |       |       |       |
-|       | mat   | thodo | thodo | ative |       |       |       |       |
-|       | erial | logy. | logy. | and   |       |       |       |       |
-|       | a     | Cri   | Cri   | the   |       |       |       |       |
-|       | nd/or | tical | tical | ori   |       |       |       |       |
-|       | inacc | judg  | judg  | ginal |       |       |       |       |
-|       | urate | ement | ement | use   |       |       |       |       |
-|       | a     | and   | and   | of    |       |       |       |       |
-|       | nswer | some  | some  | lea   |       |       |       |       |
-|       | or    | grasp | grasp | rning |       |       |       |       |
-|       | i     | of    | of    | resou |       |       |       |       |
-|       | ncomp | co    | co    | rces. |       |       |       |       |
-|       | lete. | mplex | mplex | Know  |       |       |       |       |
-|       | Di    | issue | issu  | ledge |       |       |       |       |
-|       | sorga | sGood |       | b     |       |       |       |       |
-|       | nised | know  |       | eyond |       |       |       |       |
-|       | and   | ledge |       | m     |       |       |       |       |
-|       | irrel | and   |       | odule |       |       |       |       |
-|       | evant | und   |       | con   |       |       |       |       |
-|       | mat   | ersta |       | tent. |       |       |       |       |
-|       | erial | nding |       | Clear |       |       |       |       |
-|       | and   | of    |       | evi   |       |       |       |       |
-|       | mi    | the   |       | dence |       |       |       |       |
-|       | sunde | m     |       | of    |       |       |       |       |
-|       | rstan | odule |       | i     |       |       |       |       |
-|       | ding. | con   |       | ndepe |       |       |       |       |
-|       | Mi    | tent. |       | ndent |       |       |       |       |
-|       | nimal | Reaso |       | th    |       |       |       |       |
-|       | or no | nably |       | ought |       |       |       |       |
-|       | rel   | we    |       | and   |       |       |       |       |
-|       | evant | ll-ar |       | or    |       |       |       |       |
-|       | mate  | gued. |       | igina |       |       |       |       |
-|       | rial. | La    |       | lity. |       |       |       |       |
-|       |       | rgely |       | Meth  |       |       |       |       |
-|       |       | d     |       | odolo |       |       |       |       |
-|       |       | escri |       | gical |       |       |       |       |
-|       |       | ptive |       | ri    |       |       |       |       |
-|       |       | or    |       | gour. |       |       |       |       |
-|       |       | narr  |       | High  |       |       |       |       |
-|       |       | ative |       | cri   |       |       |       |       |
-|       |       | in    |       | tical |       |       |       |       |
-|       |       | f     |       | judg  |       |       |       |       |
-|       |       | ocus. |       | ement |       |       |       |       |
-|       |       | Meth  |       | and a |       |       |       |       |
-|       |       | odolo |       | conf  |       |       |       |       |
-|       |       | gical |       | ident |       |       |       |       |
-|       |       | a     |       | grasp |       |       |       |       |
-|       |       | pplic |       | of    |       |       |       |       |
-|       |       | ation |       | co    |       |       |       |       |
-|       |       | is    |       | mplex |       |       |       |       |
-|       |       | not   |       | i     |       |       |       |       |
-|       |       | consi |       | ssues |       |       |       |       |
-|       |       | stent |       |       |       |       |       |       |
+|       | Adequ | of m  | of m  | und   |       |       |       |       |
+|       | ately | odule | odule | ersta |       |       |       |       |
+|       | ar    | con   | con   | nding |       |       |       |       |
+|       | gued. | tent. | tent. | of    |       |       |       |       |
+|       | Basic | Well  | Well  | the m |       |       |       |       |
+|       | und   | a     | a     | odule |       |       |       |       |
+|       | ersta | rgued | rgued | con   |       |       |       |       |
+|       | nding | ans   | ans   | tent. |       |       |       |       |
+|       | and   | wers. | wers. | A     |       |       |       |       |
+|       | knowl | Evi   | Evi   | clear |       |       |       |       |
+|       | edge. | dence | dence | grasp |       |       |       |       |
+|       | Gaps  | of o  | of o  | of    |       |       |       |       |
+|       | or in | rigin | rigin | the i |       |       |       |       |
+|       | accur | ality | ality | ssues |       |       |       |       |
+|       | acies | and   | and   | invo  |       |       |       |       |
+|       | but   | cri   | cri   | lved, |       |       |       |       |
+|       | not   | tical | tical | with  |       |       |       |       |
+|       | damag | judge | judge | evi   |       |       |       |       |
+|       | ing.L | ment. | ment. | dence |       |       |       |       |
+|       | ittle | Sound | Sound | of    |       |       |       |       |
+|       | rele  | me    | me    | innov |       |       |       |       |
+|       | vance | thodo | thodo | ative |       |       |       |       |
+|       | mat   | logy. | logy. | and   |       |       |       |       |
+|       | erial | Cri   | Cri   | the   |       |       |       |       |
+|       | a     | tical | tical | ori   |       |       |       |       |
+|       | nd/or | judg  | judg  | ginal |       |       |       |       |
+|       | inacc | ement | ement | use   |       |       |       |       |
+|       | urate | and   | and   | of    |       |       |       |       |
+|       | a     | some  | some  | lea   |       |       |       |       |
+|       | nswer | grasp | grasp | rning |       |       |       |       |
+|       | or i  | of co | of co | resou |       |       |       |       |
+|       | ncomp | mplex | mplex | rces. |       |       |       |       |
+|       | lete. | issue | issu  | Know  |       |       |       |       |
+|       | Di    | sGood |       | ledge |       |       |       |       |
+|       | sorga | know  |       | b     |       |       |       |       |
+|       | nised | ledge |       | eyond |       |       |       |       |
+|       | and   | and   |       | m     |       |       |       |       |
+|       | irrel | und   |       | odule |       |       |       |       |
+|       | evant | ersta |       | con   |       |       |       |       |
+|       | mat   | nding |       | tent. |       |       |       |       |
+|       | erial | of    |       | Clear |       |       |       |       |
+|       | and   | the m |       | evi   |       |       |       |       |
+|       | mi    | odule |       | dence |       |       |       |       |
+|       | sunde | con   |       | of i  |       |       |       |       |
+|       | rstan | tent. |       | ndepe |       |       |       |       |
+|       | ding. | Reaso |       | ndent |       |       |       |       |
+|       | Mi    | nably |       | th    |       |       |       |       |
+|       | nimal | we    |       | ought |       |       |       |       |
+|       | or no | ll-ar |       | and   |       |       |       |       |
+|       | rel   | gued. |       | or    |       |       |       |       |
+|       | evant | La    |       | igina |       |       |       |       |
+|       | mate  | rgely |       | lity. |       |       |       |       |
+|       | rial. | d     |       | Meth  |       |       |       |       |
+|       |       | escri |       | odolo |       |       |       |       |
+|       |       | ptive |       | gical |       |       |       |       |
+|       |       | or    |       | ri    |       |       |       |       |
+|       |       | narr  |       | gour. |       |       |       |       |
+|       |       | ative |       | High  |       |       |       |       |
+|       |       | in f  |       | cri   |       |       |       |       |
+|       |       | ocus. |       | tical |       |       |       |       |
+|       |       | Meth  |       | judg  |       |       |       |       |
+|       |       | odolo |       | ement |       |       |       |       |
+|       |       | gical |       | and a |       |       |       |       |
+|       |       | a     |       | conf  |       |       |       |       |
+|       |       | pplic |       | ident |       |       |       |       |
+|       |       | ation |       | grasp |       |       |       |       |
+|       |       | is    |       | of co |       |       |       |       |
+|       |       | not   |       | mplex |       |       |       |       |
+|       |       | consi |       | i     |       |       |       |       |
+|       |       | stent |       | ssues |       |       |       |       |
 |       |       | or    |       |       |       |       |       |       |
 |       |       | thor  |       |       |       |       |       |       |
 |       |       | ough. |       |       |       |       |       |       |
