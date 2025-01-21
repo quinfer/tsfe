@@ -11,13 +11,14 @@ Quinn](https://quinference.com/) at Queen’s Business School.
 ## Installation
 
 ``` r
+install.packages("remotes")
 remotes::install_github("quinfer/tsfe")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("quinfer/tsfe")
 ```
 
